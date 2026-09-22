@@ -1,0 +1,40 @@
+# Deploys the committed site/ to GitHub Pages (vibestaff.bot).
+#
+# There is no build step: site/ IS the artifact. What there is, before every deploy, is the gate
+# (scripts/check.mjs): the pages are all present, every local link resolves, and nothing from the
+# private workspace travels. A commit that silently loses a page must fail here, not serve 404s.
+name: pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Gate — pages present, links resolve, leak scan clean
+        run: node scripts/check.mjs
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

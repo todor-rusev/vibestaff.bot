@@ -1,0 +1,529 @@
+/* vibestaff.bot — viberoom's own page, drawn the way the window is drawn.
+   The colours, the corners and the face are viberoom's VibeClassic look (ui/tokens.js), light and dark,
+   so the page and the thing it offers are visibly one product. No framework: the page is the artifact. */
+
+@font-face { font-family: "Nunito"; font-style: normal; font-weight: 400 900; font-display: swap; src: url("fonts/nunito-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Nunito"; font-style: normal; font-weight: 400 900; font-display: swap; src: url("fonts/nunito-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Nunito"; font-style: normal; font-weight: 400 900; font-display: swap; src: url("fonts/nunito-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+
+:root {
+  --primary: #5b5bf0;
+  --primary-deep: #4f4fe0;
+  --violet: #8b5cf6;
+  --ink: #1c1b33;
+  --ink-2: #2c2b4a;
+  --ink-3: #5c5c80;
+  --muted: #8080a3;
+  --bg: #eef0fb;
+  --card: #ffffff;
+  --soft: #f6f6fb;
+  --lav: #eef0fb;
+  --lav-2: #e4e6fb;
+  --border: #e4e6fb;
+  --on-primary: #ffffff;
+  --mint-ink: #1d8f6a;
+  --mint: #d9f7e8;
+  --shadow-card: 0 1px 2px rgba(50, 40, 120, 0.06), 0 8px 24px rgba(50, 40, 120, 0.08);
+  --shadow-lift: 0 2px 4px rgba(50, 40, 120, 0.08), 0 18px 40px rgba(50, 40, 120, 0.16);
+  --bevel: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+  --canvas: radial-gradient(1200px 600px at 70% -10%, #f3f0ff 0%, transparent 60%), linear-gradient(180deg, #fdfdff 0%, #f0f1fd 100%);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #8a8aff;
+    --primary-deep: #7a7aff;
+    --violet: #a78bfa;
+    --ink: #f1efff;
+    --ink-2: #e0deff;
+    --ink-3: #c3c1e8;
+    --muted: #a4a2cc;
+    --bg: #0f1024;
+    --card: #202142;
+    --soft: #262848;
+    --lav: #2c2e56;
+    --lav-2: #35376a;
+    --border: #2c2e56;
+    --on-primary: #12132c;
+    --mint-ink: #6fe0b4;
+    --mint: #17382c;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px rgba(0, 0, 0, 0.35);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.35), 0 20px 46px rgba(0, 0, 0, 0.45);
+    --bevel: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+    --canvas: radial-gradient(1200px 600px at 70% -10%, #1d1b44 0%, transparent 60%), linear-gradient(180deg, #14152f 0%, #0f1024 100%);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: var(--canvas);
+  background-attachment: fixed;
+  color: var(--ink-2);
+  font-family: "Nunito", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { color: var(--ink); line-height: 1.2; letter-spacing: -0.015em; margin: 0 0 12px; }
+h1 { font-size: clamp(34px, 5.2vw, 58px); font-weight: 900; }
+h2 { font-size: clamp(25px, 3.4vw, 34px); font-weight: 900; }
+h3 { font-size: 19px; font-weight: 800; }
+p { margin: 0 0 14px; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; height: auto; }
+
+.wrap { width: min(1120px, calc(100% - 44px)); margin: 0 auto; }
+.lede { font-size: clamp(17px, 2vw, 20px); color: var(--ink-3); max-width: 60ch; }
+.quiet { color: var(--muted); font-size: 14px; font-weight: 600; }
+.center { text-align: center; }
+section { padding: 72px 0; }
+@media (max-width: 720px) { section { padding: 52px 0; } }
+
+/* ---------- the bar at the top ---------- */
+.bar { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--border); }
+.bar .wrap { display: flex; align-items: center; gap: 14px; height: 64px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 900; font-size: 19px; color: var(--ink); letter-spacing: -0.02em; }
+.brand:hover { text-decoration: none; }
+.brand img { width: 30px; height: 30px; border-radius: 9px; }
+.bar nav { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.bar nav a { padding: 7px 12px; border-radius: 10px; color: var(--ink-3); font-weight: 800; font-size: 14.5px; }
+.bar nav a:hover { background: var(--lav-2); color: var(--primary); text-decoration: none; }
+@media (max-width: 760px) { .bar nav .hide-sm { display: none; } }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 0 22px; height: 50px; border: 0; border-radius: 15px;
+  background-color: var(--card); background-image: var(--bevel);
+  color: var(--ink); font: inherit; font-weight: 800; font-size: 16px;
+  box-shadow: var(--shadow-card); cursor: pointer; white-space: nowrap;
+  transition: transform 160ms cubic-bezier(.2,.8,.3,1.1), box-shadow 160ms, background 160ms, color 160ms;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); text-decoration: none; }
+.btn:active { transform: translateY(1px); }
+.btn .i { width: 20px; height: 20px; flex: none; }
+.btn.primary { background-image: var(--bevel), linear-gradient(135deg, var(--primary), var(--violet)); color: var(--on-primary); }
+.btn.primary:hover { filter: brightness(1.05); }
+.btn.ghost { background: transparent; background-image: none; box-shadow: inset 0 0 0 2px var(--border); color: var(--ink-2); }
+.btn.ghost:hover { box-shadow: inset 0 0 0 2px var(--primary); color: var(--primary); }
+.btn.sm { height: 40px; padding: 0 16px; font-size: 14.5px; border-radius: 12px; }
+.btn[aria-disabled="true"] { opacity: 0.55; pointer-events: none; }
+
+/* ---------- hero ---------- */
+.hero { padding: 64px 0 40px; }
+.hero .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 46px; align-items: center; }
+@media (max-width: 960px) { .hero .cols { grid-template-columns: 1fr; gap: 34px; } }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px; border-radius: 999px; background: var(--lav-2); color: var(--primary); font-size: 13.5px; font-weight: 800; margin-bottom: 18px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 26px; }
+.hero-note { margin-top: 14px; }
+.shot { border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lift); background: var(--card); display: block; }
+.shot img { display: block; }
+/* the pair below `.shot img`, and with a class of its own on each side, so the rule that shows a picture
+   cannot undo the rule that hides the other one (both were drawn, one under the other) */
+.shot img.only-light { display: block; } .shot img.only-dark { display: none; }
+@media (prefers-color-scheme: dark) { .shot img.only-light { display: none; } .shot img.only-dark { display: block; } }
+
+.vendors { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 30px; }
+.vendors span { padding: 5px 13px; border-radius: 999px; background: var(--soft); box-shadow: inset 0 0 0 1px var(--border); color: var(--ink-3); font-size: 13.5px; font-weight: 800; }
+
+/* ---------- download ---------- */
+.dl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 34px; }
+@media (max-width: 900px) { .dl-grid { grid-template-columns: 1fr; } }
+.dl {
+  background: var(--card); background-image: var(--bevel); border-radius: 20px; padding: 26px 24px 24px;
+  box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 6px;
+  transition: transform 180ms cubic-bezier(.2,.8,.3,1.1), box-shadow 180ms;
+}
+.dl:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+.dl.is-yours { box-shadow: inset 0 0 0 2px var(--primary), var(--shadow-lift); }
+.dl .os { display: flex; align-items: center; gap: 11px; margin-bottom: 4px; }
+.dl .os svg { width: 26px; height: 26px; color: var(--ink); flex: none; }
+.dl .os h3 { margin: 0; }
+.dl .yours { margin-left: auto; font-size: 12px; font-weight: 800; color: var(--primary); background: var(--lav-2); padding: 3px 10px; border-radius: 999px; }
+.dl .what { color: var(--muted); font-size: 14px; min-height: 42px; }
+.dl .btn { width: 100%; margin-top: 10px; }
+.dl .alt { display: flex; gap: 8px; margin-top: 8px; }
+.dl .alt .btn { margin-top: 0; }
+.dl .aside { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+.dl .aside a { font-weight: 800; }
+
+.fallback { margin-top: 26px; background: var(--soft); border-radius: 20px; padding: 24px; box-shadow: inset 0 0 0 1px var(--border); }
+.fallback h3 { margin-bottom: 6px; }
+.cmd { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.cmd code {
+  font-family: "Cascadia Code", "Fira Code", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 14.5px; font-weight: 600; background: var(--card); color: var(--ink);
+  padding: 11px 15px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--border);
+}
+.ok { color: var(--mint-ink); background: var(--mint); }
+
+/* ---------- features ---------- */
+
+.band { background: var(--card); background-image: var(--bevel); border-radius: 26px; padding: 40px; box-shadow: var(--shadow-card); }
+@media (max-width: 720px) { .band { padding: 26px; border-radius: 20px; } }
+
+.looks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+@media (max-width: 900px) { .looks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .looks { grid-template-columns: 1fr; } }
+.looks a { display: block; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-card); background: var(--card); transition: transform 180ms cubic-bezier(.2,.8,.3,1.1), box-shadow 180ms; }
+.looks a:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); text-decoration: none; }
+.looks img { display: block; width: 100%; }
+.looks b { display: block; padding: 11px 14px; color: var(--ink); font-size: 14.5px; }
+
+.steps { counter-reset: s; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 30px; }
+@media (max-width: 900px) { .steps { grid-template-columns: 1fr; } }
+.steps > div { position: relative; padding-left: 52px; }
+.steps > div::before {
+  counter-increment: s; content: counter(s);
+  position: absolute; left: 0; top: 0; width: 38px; height: 38px; border-radius: 12px;
+  display: grid; place-items: center; font-weight: 900; font-size: 17px;
+  background-image: linear-gradient(135deg, var(--primary), var(--violet)); color: var(--on-primary);
+}
+.steps h3 { margin-bottom: 4px; }
+.steps p { color: var(--ink-3); font-size: 15.5px; margin: 0; }
+
+.need { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 16px; padding: 0; list-style: none; }
+.need li { color: var(--ink-3); font-size: 15px; }
+.need li b { color: var(--ink); }
+
+footer { border-top: 1px solid var(--border); padding: 34px 0 48px; margin-top: 30px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+footer nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+footer a, footer span { color: var(--muted); font-size: 14.5px; font-weight: 700; }
+footer a:hover { color: var(--primary); }
+
+/* the page arrives the way the window's own panels do */
+.rise { animation: rise 620ms cubic-bezier(.2,.8,.3,1) both; }
+.rise-2 { animation-delay: 90ms; }
+.rise-3 { animation-delay: 170ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; } .btn, .dl, .looks a { transition: none; } }
+
+
+/* ================================================================================================
+   THE WORLD BEHIND THE PAGE
+   Flat paper was the thing to fix: the page wanted depth, not decoration. Depth
+   here is built the way a room has depth rather than the way a poster imitates one: something far
+   (an aurora that drifts), something underfoot (a floor that recedes toward a horizon), and something
+   near (motes that rise past the reader). Three fixed layers, no library, and every one of them moves
+   with transform and opacity alone, so the whole thing stays on the compositor and never touches
+   layout. All of it stops under `prefers-reduced-motion` — a background that cannot be escaped is the
+   worst possible place to insist on motion.
+   ================================================================================================ */
+
+.world { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+
+.aurora { position: absolute; border-radius: 50%; filter: blur(96px); opacity: 0.5; will-change: transform; }
+.aurora.a1 { width: 52vw; height: 52vw; left: -12vw; top: -14vw; background: radial-gradient(circle at 40% 40%, var(--aur-1), transparent 68%); animation: drift-1 34s ease-in-out infinite alternate; }
+.aurora.a2 { width: 46vw; height: 46vw; right: -10vw; top: 6vh; background: radial-gradient(circle at 60% 40%, var(--aur-2), transparent 68%); animation: drift-2 41s ease-in-out infinite alternate; }
+.aurora.a3 { width: 58vw; height: 58vw; left: 22vw; bottom: -24vw; background: radial-gradient(circle at 50% 50%, var(--aur-3), transparent 70%); animation: drift-3 47s ease-in-out infinite alternate; }
+@keyframes drift-1 { to { transform: translate3d(9vw, 7vh, 0) scale(1.18); } }
+@keyframes drift-2 { to { transform: translate3d(-11vw, 12vh, 0) scale(1.12); } }
+@keyframes drift-3 { to { transform: translate3d(7vw, -9vh, 0) scale(0.88); } }
+
+/* The floor. Drawn rather than rotated: `perspective()` about an element's own bottom edge collapses a
+   tall plane into a sliver at the hinge, and the grid was invisible on the page while being perfectly
+   present in the DOM. So the convergence is in the gradients themselves — rays from a vanishing point
+   below the fold, and horizon lines whose gaps close as they recede. It renders identically everywhere
+   and costs one paint. */
+.floor {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 56vh;
+  background-image:
+    repeating-conic-gradient(from 214deg at 50% 132%, var(--grid) 0 0.14deg, transparent 0.14deg 3.4deg),
+    linear-gradient(to top,
+      transparent 0 5%, var(--grid) 5% calc(5% + 1px),
+      transparent calc(5% + 1px) 15%, var(--grid) 15% calc(15% + 1px),
+      transparent calc(15% + 1px) 27%, var(--grid) 27% calc(27% + 1px),
+      transparent calc(27% + 1px) 40%, var(--grid) 40% calc(40% + 1px),
+      transparent calc(40% + 1px) 53%, var(--grid) 53% calc(53% + 1px),
+      transparent calc(53% + 1px) 65%, var(--grid) 65% calc(65% + 1px),
+      transparent calc(65% + 1px) 75%, var(--grid) 75% calc(75% + 1px),
+      transparent calc(75% + 1px) 83%, var(--grid) 83% calc(83% + 1px),
+      transparent calc(83% + 1px) 89%, var(--grid) 89% calc(89% + 1px),
+      transparent calc(89% + 1px) 100%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 88%);
+  mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 88%);
+}
+
+.motes { position: absolute; inset: 0; }
+.motes i { position: absolute; bottom: -8vh; width: 7px; height: 7px; border-radius: 50%; background: var(--mote); filter: blur(0.5px); opacity: 0; animation: mote-rise linear infinite; }
+.motes i:nth-child(1) { left: 6%; animation-duration: 26s; animation-delay: -3s; }
+.motes i:nth-child(2) { left: 15%; width: 4px; height: 4px; animation-duration: 34s; animation-delay: -11s; }
+.motes i:nth-child(3) { left: 24%; width: 10px; height: 10px; animation-duration: 41s; animation-delay: -21s; }
+.motes i:nth-child(4) { left: 33%; animation-duration: 29s; animation-delay: -7s; }
+.motes i:nth-child(5) { left: 42%; width: 5px; height: 5px; animation-duration: 37s; animation-delay: -27s; }
+.motes i:nth-child(6) { left: 51%; width: 9px; height: 9px; animation-duration: 44s; animation-delay: -14s; }
+.motes i:nth-child(7) { left: 60%; animation-duration: 31s; animation-delay: -33s; }
+.motes i:nth-child(8) { left: 69%; width: 4px; height: 4px; animation-duration: 39s; animation-delay: -5s; }
+.motes i:nth-child(9) { left: 78%; width: 11px; height: 11px; animation-duration: 48s; animation-delay: -19s; }
+.motes i:nth-child(10) { left: 86%; animation-duration: 28s; animation-delay: -24s; }
+.motes i:nth-child(11) { left: 93%; width: 5px; height: 5px; animation-duration: 36s; animation-delay: -9s; }
+.motes i:nth-child(12) { left: 47%; width: 6px; height: 6px; animation-duration: 52s; animation-delay: -38s; }
+@keyframes mote-rise {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  12% { opacity: 0.7; }
+  84% { opacity: 0.55; }
+  100% { transform: translate3d(3vw, -118vh, 0); opacity: 0; }
+}
+
+:root { --aur-1: #c9c6ff; --aur-2: #ffd9c2; --aur-3: #c6ecff; --grid: rgba(91, 91, 240, 0.16); --mote: rgba(91, 91, 240, 0.34); }
+@media (prefers-color-scheme: dark) {
+  :root { --aur-1: #3a2f7a; --aur-2: #5a2f52; --aur-3: #1f3f6b; --grid: rgba(150, 150, 255, 0.13); --mote: rgba(170, 170, 255, 0.4); }
+  .aurora { opacity: 0.62; }
+}
+
+/* ================================================================================================
+   THE STACK OF CARDS
+   One column, read top to bottom, each card stepped to its own side and tilted a couple of degrees —
+   and the words inside turned back level, because a tilted card is a thing on a desk while tilted
+   text is just hard to read.
+   Under the hand a card straightens, rises, and leans toward the pointer; the whole shape lives in
+   one transform chain whose parts are custom properties, so hover changes four numbers rather than
+   re-declaring the transform, and alive.js only ever feeds two more.
+   ================================================================================================ */
+
+.stack { display: flex; flex-direction: column; gap: 22px; margin-top: 40px; perspective: 1300px; }
+
+.card {
+  --tilt: 0deg; --shift: 0%; --lift: 0px; --scale: 1; --enter: 36px; --rx: 0deg; --ry: 0deg; --gx: 50%; --gy: 0%;
+  position: relative; width: min(600px, 100%); padding: 30px 34px; border-radius: 28px;
+  background-image: var(--bevel), var(--tint-bg);
+  box-shadow: 0 2px 4px rgba(50, 40, 120, 0.07), 0 18px 44px -12px rgba(50, 40, 120, 0.3), 0 0 0 1px var(--tint-edge) inset;
+  color: var(--tint-ink);
+  transform-style: preserve-3d;
+  transform: translateY(var(--enter)) translateX(var(--shift)) rotate(var(--tilt)) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift)) scale(var(--scale));
+  transition: transform 520ms cubic-bezier(.2, .9, .3, 1.15), box-shadow 420ms, opacity 520ms ease;
+}
+.card[data-side="left"] { align-self: flex-start; }
+.card[data-side="right"] { align-self: flex-end; }
+
+/* The words lean with the card, the way writing on a tilted note does: no turn of their own, so they
+   simply inherit the card's. They come square to the screen the moment the hand arrives, because that
+   is when the card itself straightens — the straightening is the answer, not the resting state. */
+.card-body { position: relative; z-index: 1; }
+.card h3 { font-size: clamp(20px, 2.4vw, 25px); margin: 0 0 8px; color: var(--tint-ink); }
+.card p { margin: 0; color: var(--tint-body); font-size: 16px; line-height: 1.6; }
+.card-mark { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 16px; border-radius: 16px; background: var(--tint-mark); color: var(--tint-accent); box-shadow: var(--shadow-card); transform: translateZ(26px); transition: transform 520ms cubic-bezier(.2, .9, .3, 1.15); }
+.card-mark svg { width: 25px; height: 25px; }
+
+/* the sheen: where the light lands follows the hand, and it is nothing until the hand is there */
+.card-glow { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 380ms ease; background: radial-gradient(420px circle at var(--gx) var(--gy), var(--tint-glow), transparent 62%); }
+
+@media (min-width: 900px) {
+  .card[data-side="left"] { --tilt: -2.1deg; --shift: -3%; }
+  .card[data-side="right"] { --tilt: 2.1deg; --shift: 3%; }
+  .card:nth-child(3n) { --tilt: 1.4deg; }
+  .card:nth-child(4n) { --tilt: -1.6deg; }
+}
+
+.card:hover, .card:focus-within { --tilt: 0deg; --shift: 0%; --lift: -10px; --scale: 1.025; box-shadow: 0 4px 8px rgba(50, 40, 120, 0.09), 0 34px 70px -16px rgba(50, 40, 120, 0.42), 0 0 0 1px var(--tint-accent) inset; }
+.card:hover .card-mark, .card:focus-within .card-mark { transform: translateZ(46px) scale(1.08) rotate(-5deg); }
+.card:hover .card-glow, .card:focus-within .card-glow { opacity: 1; }
+/* while the hand is moving the lean must keep up with it; the settle back is the slow one */
+.card.leaning { transition: transform 110ms linear, box-shadow 420ms; }
+
+/* arrival: only a page that has JavaScript hides anything, so a page without it is simply all here */
+.js .reveal, .js .card { opacity: 0; }
+.js .reveal { transform: translateY(22px); transition: opacity 620ms ease, transform 620ms cubic-bezier(.2, .9, .3, 1.1); }
+.js .reveal.in { opacity: 1; transform: none; }
+.js .card.in { opacity: 1; --enter: 0px; }
+
+/* the six tints, taken from the window's own palette so the page and the product are one world */
+.card[data-tint="violet"] { --tint-bg: linear-gradient(142deg, #e8e8ff, #f5f1ff); --tint-ink: #241f52; --tint-body: #4a4585; --tint-accent: #5b5bf0; --tint-mark: #ffffff; --tint-edge: rgba(91, 91, 240, 0.16); --tint-glow: rgba(139, 92, 246, 0.22); }
+.card[data-tint="mint"] { --tint-bg: linear-gradient(142deg, #d9f6ea, #edfbf4); --tint-ink: #10402f; --tint-body: #2f6b57; --tint-accent: #1d8f6a; --tint-mark: #ffffff; --tint-edge: rgba(29, 143, 106, 0.16); --tint-glow: rgba(47, 201, 126, 0.22); }
+.card[data-tint="amber"] { --tint-bg: linear-gradient(142deg, #fff1c7, #fff9e7); --tint-ink: #4a3405; --tint-body: #7a5b12; --tint-accent: #a07408; --tint-mark: #ffffff; --tint-edge: rgba(160, 116, 8, 0.16); --tint-glow: rgba(245, 165, 36, 0.24); }
+.card[data-tint="peach"] { --tint-bg: linear-gradient(142deg, #ffe0cb, #fff1e6); --tint-ink: #59250f; --tint-body: #8a4526; --tint-accent: #c9461c; --tint-mark: #ffffff; --tint-edge: rgba(201, 70, 28, 0.15); --tint-glow: rgba(255, 138, 61, 0.24); }
+.card[data-tint="sky"] { --tint-bg: linear-gradient(142deg, #d8ecff, #eef7ff); --tint-ink: #10304f; --tint-body: #2d5a85; --tint-accent: #2a6fbf; --tint-mark: #ffffff; --tint-edge: rgba(42, 111, 191, 0.16); --tint-glow: rgba(79, 142, 247, 0.24); }
+.card[data-tint="orchid"] { --tint-bg: linear-gradient(142deg, #f1e0fb, #faf2fe); --tint-ink: #3d1b57; --tint-body: #6b3d8c; --tint-accent: #8a3fc2; --tint-mark: #ffffff; --tint-edge: rgba(138, 63, 194, 0.15); --tint-glow: rgba(176, 107, 224, 0.24); }
+
+@media (prefers-color-scheme: dark) {
+  .card[data-tint="violet"] { --tint-bg: linear-gradient(142deg, #262357, #1b1a40); --tint-ink: #eceaff; --tint-body: #b6b2e8; --tint-accent: #a5a5ff; --tint-mark: #100f2c; --tint-edge: rgba(165, 165, 255, 0.16); --tint-glow: rgba(139, 92, 246, 0.3); }
+  .card[data-tint="mint"] { --tint-bg: linear-gradient(142deg, #143a2d, #0f2a22); --tint-ink: #e2fff2; --tint-body: #97d9c0; --tint-accent: #6fe0b4; --tint-mark: #08201a; --tint-edge: rgba(111, 224, 180, 0.16); --tint-glow: rgba(47, 201, 126, 0.28); }
+  .card[data-tint="amber"] { --tint-bg: linear-gradient(142deg, #3d3013, #2c230e); --tint-ink: #fff4d8; --tint-body: #ddc58a; --tint-accent: #f5c94f; --tint-mark: #211a08; --tint-edge: rgba(245, 201, 79, 0.16); --tint-glow: rgba(245, 165, 36, 0.28); }
+  .card[data-tint="peach"] { --tint-bg: linear-gradient(142deg, #40251a, #2e1a11); --tint-ink: #ffe8dc; --tint-body: #e0ae94; --tint-accent: #ff9f7a; --tint-mark: #21120c; --tint-edge: rgba(255, 159, 122, 0.16); --tint-glow: rgba(255, 138, 61, 0.28); }
+  .card[data-tint="sky"] { --tint-bg: linear-gradient(142deg, #133253, #0e253d); --tint-ink: #e2f1ff; --tint-body: #a0c4e6; --tint-accent: #8cc6ff; --tint-mark: #0a1a2c; --tint-edge: rgba(140, 198, 255, 0.16); --tint-glow: rgba(79, 142, 247, 0.28); }
+  .card[data-tint="orchid"] { --tint-bg: linear-gradient(142deg, #311c47, #241334); --tint-ink: #f6e9ff; --tint-body: #c9a8e0; --tint-accent: #d9a6f5; --tint-mark: #1a0e26; --tint-edge: rgba(217, 166, 245, 0.16); --tint-glow: rgba(176, 107, 224, 0.3); }
+}
+
+/* a finger has no hover and a narrow screen has no room to step sideways: straight, still, all here */
+@media (max-width: 899px) {
+  .card { width: 100%; --tilt: 0deg; --shift: 0%; }
+  .stack { gap: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .floor, .motes i { animation: none; }
+  .motes i { opacity: 0.4; bottom: auto; top: 40%; }
+  .card, .card-body, .card-mark, .card-glow { transition: none; }
+  .js .reveal, .js .card { opacity: 1; transform: none; }
+  .card { --tilt: 0deg; --shift: 0%; }
+}
+
+
+/* ================================================================================================
+   THE OPENING
+   A bot draws itself, two rings open around it, three smaller ones join, and the whole thing lifts
+   away as the page beneath resolves out of its own skeleton. It is over in a second and a half and any
+   press, key or scroll ends it early; alive.js takes the node out of the document afterwards.
+   ================================================================================================ */
+
+.boot { position: fixed; inset: 0; z-index: 60; display: grid; grid-auto-flow: row; justify-items: center; align-content: center; gap: 26px; background: var(--bg); background-image: var(--canvas); transition: opacity 620ms ease, transform 620ms cubic-bezier(.4, 0, .2, 1); }
+.boot.done { opacity: 0; transform: scale(1.06); pointer-events: none; }
+html:not(.js) .boot { display: none; }
+
+.boot-art { width: min(240px, 46vw); height: auto; overflow: visible; }
+.boot-art .head { fill: none; stroke: var(--primary); stroke-width: 5; stroke-linejoin: round; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 760ms cubic-bezier(.4, 0, .2, 1) forwards; }
+.boot-art .wireless { fill: none; stroke: var(--primary); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 20; stroke-dashoffset: 20; animation: draw 300ms 620ms ease forwards; }
+.boot-art .knob { fill: var(--violet); opacity: 0; animation: pop-in 360ms 820ms cubic-bezier(.2, .9, .3, 1.6) forwards; }
+.boot-art .eye { fill: var(--primary); opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop-in 320ms 760ms cubic-bezier(.2, .9, .3, 1.6) forwards, blink 2.4s 1.2s infinite; }
+.boot-art .mouth { fill: none; stroke: var(--violet); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 34; stroke-dashoffset: 34; animation: draw 300ms 900ms ease forwards; }
+.boot-art .ring { fill: none; stroke: var(--primary); stroke-width: 1.6; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.boot-art .ring.r1 { animation: ring-out 1100ms 780ms cubic-bezier(.2, .8, .3, 1) forwards; }
+.boot-art .ring.r2 { animation: ring-out 1100ms 960ms cubic-bezier(.2, .8, .3, 1) forwards; }
+.boot-art .boot-mates circle { fill: var(--bg); }
+.boot-art .boot-mates > g { opacity: 0; transform-box: fill-box; transform-origin: center bottom; animation: mate-in 420ms cubic-bezier(.2, .9, .3, 1.6) forwards; }
+.boot-art .boot-mates rect { fill: var(--violet); }
+.boot-art .boot-mates > g:nth-child(1) { animation-delay: 1000ms; }
+.boot-art .boot-mates > g:nth-child(2) { animation-delay: 1090ms; }
+.boot-art .boot-mates > g:nth-child(3) { animation-delay: 1180ms; }
+.boot-word { margin: 0; color: var(--muted); font-size: 14px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0; animation: fade-up 520ms 700ms ease forwards; }
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
+@keyframes mate-in { from { opacity: 0; transform: translateY(14px) scale(0.6); } to { opacity: 0.85; transform: none; } }
+@keyframes ring-out { 0% { opacity: 0.55; transform: scale(0.45); } 100% { opacity: 0; transform: scale(1.25); } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 0.9; transform: none; } }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
+
+/* ================================================================================================
+   THE SKELETON
+   Blocks of the right size and shape stand in for the words, shimmer once, and hand over. It is the
+   page assembling itself rather than fading in — and because the real content is in the document the
+   whole time, a reader without JavaScript and a search engine both see the words and never the bones.
+   ================================================================================================ */
+
+.js .sk { position: relative; }
+.js .sk:not(.ready) { color: transparent !important; }
+.js .sk:not(.ready) * { visibility: hidden; }
+.js .sk:not(.ready)::after {
+  content: ""; position: absolute; inset: -2px -4px; border-radius: 12px; visibility: visible;
+  background: linear-gradient(100deg, var(--sk-base) 34%, var(--sk-lift) 50%, var(--sk-base) 66%) 0 0 / 260% 100%;
+  animation: sk-sweep 1.5s linear infinite;
+}
+.js h1.sk:not(.ready)::after { border-radius: 18px; inset: 4px -4px 10px; }
+.js .sk.ready { animation: sk-settle 560ms cubic-bezier(.2, .9, .3, 1.1) both; }
+:root { --sk-base: rgba(91, 91, 240, 0.09); --sk-lift: rgba(91, 91, 240, 0.2); }
+@media (prefers-color-scheme: dark) { :root { --sk-base: rgba(160, 160, 255, 0.1); --sk-lift: rgba(160, 160, 255, 0.22); } }
+@keyframes sk-sweep { to { background-position: -260% 0; } }
+@keyframes sk-settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ================================================================================================
+   THE ROOM, ALIVE
+   The hero's picture is the product's own shape: one chat in the middle, four agents around it, you at
+   the near edge, and what travels between them drawn as it travels. The pulses ride the wires through
+   SMIL `mpath`, which means the path is written once and the motion refers to it — no second copy of
+   the geometry to drift out of step with the first.
+   ================================================================================================ */
+
+.stage { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.scene { width: 100%; max-width: 560px; height: auto; overflow: visible; }
+.stage-note { margin: 0; color: var(--muted); font-size: 14px; font-weight: 700; text-align: center; }
+
+.scene .room { fill: var(--card); stroke: var(--border); stroke-width: 1.5; }
+.scene .room-glow { fill: none; stroke: var(--primary); stroke-width: 10; opacity: 0.12; filter: blur(10px); animation: room-breathe 5.4s ease-in-out infinite; }
+@keyframes room-breathe { 50% { opacity: 0.26; stroke-width: 15; } }
+
+.scene .wire { fill: none; stroke: var(--primary); stroke-width: 1.6; opacity: 0.3; stroke-dasharray: 5 7; animation: wire-run 2.4s linear infinite; }
+@keyframes wire-run { to { stroke-dashoffset: -24; } }
+.scene .pulse { fill: var(--primary); filter: drop-shadow(0 0 5px color-mix(in srgb, var(--primary) 60%, transparent)); }
+.scene .me-pulse { fill: var(--violet); }
+
+.scene .lines rect { fill: var(--lav-2); }
+.scene .lines circle { fill: var(--primary); opacity: 0.55; }
+.scene .line { opacity: 0; transform-box: fill-box; transform-origin: left center; animation: line-in 7.2s ease-in-out infinite; }
+.scene .line.mine rect { fill: color-mix(in srgb, var(--primary) 78%, transparent); }
+.scene .l1 { animation-delay: 0s; } .scene .l2 { animation-delay: 1.1s; }
+.scene .l3 { animation-delay: 2.2s; } .scene .l4 { animation-delay: 3.3s; }
+@keyframes line-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  7%, 62% { opacity: 1; transform: none; }
+  74%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+
+.scene .bot .head, .scene .me .head { fill: var(--bot-tile); stroke: var(--bot-ink); stroke-width: 2; }
+.scene .bot .eye, .scene .me .eye { fill: var(--bot-ink); transform-box: fill-box; transform-origin: center; }
+.scene .bot .mouth, .scene .me .smile { fill: none; stroke: var(--bot-ink); stroke-width: 2.4; stroke-linecap: round; }
+.scene .bot .wireless { fill: none; stroke: var(--bot-ink); stroke-width: 2.4; stroke-linecap: round; }
+.scene .bot .knob { fill: var(--bot-ink); }
+.scene .bot { transform-box: fill-box; animation: bot-bob 4.6s ease-in-out infinite; }
+.scene .bot:nth-of-type(2) { animation-delay: -1.2s; }
+.scene .bot:nth-of-type(3) { animation-delay: -2.4s; }
+.scene .bot:nth-of-type(4) { animation-delay: -3.6s; }
+.scene .bot .eye { animation: blink 5.2s infinite; }
+.scene .bot:nth-of-type(2) .eye { animation-delay: -1.7s; }
+.scene .bot:nth-of-type(3) .eye { animation-delay: -3.1s; }
+.scene .bot:nth-of-type(4) .eye { animation-delay: -4.4s; }
+@keyframes bot-bob { 50% { translate: 0 -7px; } }
+.scene .me { --bot-tile: var(--lav-2); --bot-ink: var(--primary); }
+.scene .me .eye { animation: blink 4.4s .8s infinite; }
+.scene [data-tint="violet"] { --bot-tile: #e8e8ff; --bot-ink: #5b5bf0; }
+.scene [data-tint="mint"] { --bot-tile: #d9f6ea; --bot-ink: #1d8f6a; }
+.scene [data-tint="amber"] { --bot-tile: #fff1c7; --bot-ink: #a07408; }
+.scene [data-tint="sky"] { --bot-tile: #d8ecff; --bot-ink: #2a6fbf; }
+@media (prefers-color-scheme: dark) {
+  .scene [data-tint="violet"] { --bot-tile: #262357; --bot-ink: #a5a5ff; }
+  .scene [data-tint="mint"] { --bot-tile: #143a2d; --bot-ink: #6fe0b4; }
+  .scene [data-tint="amber"] { --bot-tile: #3d3013; --bot-ink: #f5c94f; }
+  .scene [data-tint="sky"] { --bot-tile: #133253; --bot-ink: #8cc6ff; }
+}
+
+/* ================================================================================================
+   THE REAL WINDOW, AND THE REST OF THE SHINE
+   ================================================================================================ */
+
+.showcase .frame { display: block; position: relative; margin-top: 30px; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 10px rgba(50, 40, 120, 0.1), 0 40px 90px -24px rgba(50, 40, 120, 0.45); transform: perspective(1600px) rotateX(7deg) scale(0.985); transition: transform 700ms cubic-bezier(.2, .9, .3, 1.1), box-shadow 700ms; }
+.showcase .frame:hover { transform: perspective(1600px) rotateX(0deg) scale(1); box-shadow: 0 6px 14px rgba(50, 40, 120, 0.12), 0 56px 120px -28px rgba(50, 40, 120, 0.5); text-decoration: none; }
+.showcase .frame img { display: block; width: 100%; }
+.showcase .frame-cta { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; padding: 11px 22px; border-radius: 14px; background: color-mix(in srgb, var(--card) 86%, transparent); backdrop-filter: blur(10px); color: var(--primary); font-weight: 800; font-size: 15px; box-shadow: var(--shadow-card); opacity: 0; transition: opacity 400ms ease, translate 400ms cubic-bezier(.2, .9, .3, 1.1); }
+.showcase .frame:hover .frame-cta { opacity: 1; translate: -50% -6px; }
+
+h1 em { font-style: normal; background: linear-gradient(120deg, var(--primary), var(--violet) 55%, #ff8a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* every heading gets a short rule that draws itself in as the heading arrives */
+h2 { position: relative; }
+.js h2.reveal::after { content: ""; position: absolute; left: 0; bottom: -10px; height: 3px; width: 0; border-radius: 2px; background: linear-gradient(90deg, var(--primary), var(--violet)); transition: width 700ms 200ms cubic-bezier(.2, .9, .3, 1); }
+.js h2.reveal.in::after { width: 64px; }
+.band h2.reveal::after, .center h2.reveal::after { left: 50%; translate: -50% 0; }
+
+/* how far down the page you are, as a hairline across the top */
+.progress { position: fixed; left: 0; top: 0; height: 3px; width: 100%; transform-origin: left center; transform: scaleX(var(--read, 0)); background: linear-gradient(90deg, var(--primary), var(--violet), #ff8a3d); z-index: 40; pointer-events: none; }
+
+@media (max-width: 899px) { .scene { max-width: 420px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .boot { display: none; }
+  .boot-art *, .boot-word { animation: none !important; }
+  .scene *, .scene .bot, .scene .line, .scene .room-glow, .scene .wire { animation: none !important; }
+  .scene .line { opacity: 1; }
+  .js .sk:not(.ready)::after { animation: none; }
+  .js .sk.ready { animation: none; }
+  .showcase .frame, .showcase .frame-cta { transition: none; transform: none; }
+  .progress { display: none; }
+}
+
+
+/* ---------- vibestaff: the staff of the room ---------- */
+.boot-word { display: grid; justify-items: center; gap: 6px; }
+.boot-who { font-size: 13px; letter-spacing: 0.22em; opacity: 0; animation: fade-up 480ms 640ms ease forwards; }
+.boot-what { font-size: 24px; letter-spacing: -0.01em; text-transform: none; color: var(--ink); opacity: 0; transform: translateY(8px); animation: fade-up 520ms 1000ms cubic-bezier(.2,.9,.3,1.2) forwards; }
+.eyebrow b, .stage-note b, footer b { color: var(--primary); font-weight: 900; letter-spacing: 0.02em; }
