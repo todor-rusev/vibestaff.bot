@@ -1,0 +1,4 @@
+# Preserve the reviewed upstream bytes, including whitespace inside bundled strings.
+site/dave-studio/demo/vendor/** -text whitespace=-blank-at-eol,-blank-at-eof
+# The exported product renderer also keeps its upstream formatting verbatim.
+site/dave-studio/demo/** whitespace=-blank-at-eol,-blank-at-eof

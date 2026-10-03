@@ -35,7 +35,14 @@ command -v node >/dev/null || abort "node is required (the gate runs on it)"
 [[ -d "$HERE/site" ]] || abort "no site/ beside this script"
 
 TMP="$(mktemp -d)"
-trap 'rm -rf "$TMP"' EXIT
+TMP="$(cd "$TMP" && pwd)"
+[[ "$TMP" == /* && "$TMP" != / ]] || abort "temporary directory must be absolute"
+touch "$TMP/.sync-site-owned"
+cleanup() {
+  [[ -f "$TMP/.sync-site-owned" ]] || return
+  rm -rf -- "$TMP"
+}
+trap cleanup EXIT
 STAGE="$TMP/stage"
 mkdir -p "$STAGE"
 
@@ -63,6 +70,8 @@ if ! git clone --depth 1 --branch "$BRANCH" "$REMOTE" "$CLONE" 2>/dev/null; then
 fi
 
 # replace the tree wholesale: a file deleted here must disappear there too
+[[ "$(cd "$CLONE" && pwd)" == "$TMP/clone" && -d "$CLONE/.git" ]] \
+  || abort "public clone escaped the owned temporary directory"
 find "$CLONE" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 cp -R "$STAGE/." "$CLONE/"
 

@@ -1,10 +1,81 @@
 # vibestaff.bot
 
-The download page for [viberoom](https://github.com/todor-rusev/viberoom): one button per system,
-the demo, and what the thing is.
+A spatial introduction to [viberoom](https://github.com/todor-rusev/viberoom). The whole site is a
+navigable world: six feature destinations, a collaboration investigation, and downloads. The room
+sits at its centre. Choose a node, move into its explanation, dive into the practical guide and go
+back to the same map position and zoom.
 
-A static site — the committed `site/` directory **is** the deployed artifact, there is no build step.
-GitHub Pages serves it through `.github/workflows/pages.yml`.
+The committed `site/` directory is the deployed artifact. GitHub Pages serves it through
+`.github/workflows/pages.yml`; deployment needs no build step.
+
+## The spatial navigation
+
+`site/assets/world-map.js` describes the destinations. `world.js` owns the camera, drag and zoom,
+layer parallax, fragment routes, browser history and keyboard focus. The URL records the current
+destination (`#/memory`) and its nested guide (`#/memory/how`). A direct link supports a useful
+Go back even without an earlier in-app history entry. The map remembers a visitor's pan and zoom
+while they explore a topic. On narrow screens its nodes form a taller connected world.
+
+The art, links and foreground objects move on separate depth planes. Illustrations are accompanied
+by articulated agent arms and heads, turning pages, travelling signals and moving controls.
+The Motion switch and the system's reduced-motion preference disable decorative animation and
+camera easing. Normal links, buttons and keyboard focus remain available.
+
+Copy lives in `scripts/landing-content.mjs`. Run `npm run render` after editing it,
+`scripts/render-world.mjs`, the map or `scripts/world-film.html`; commit the resulting HTML.
+The six guides, their steps, downloads and a readable demo transcript are also present without JS.
+
+## The investigation
+
+`site/assets/investigation-scene.js` is the single source for the authored dialogue, timings,
+chapters and transcript. The 34-second example investigates a checkout regression: one agent
+compares events, the other checks code, a counterexample changes the initial conclusion, and the
+cause and focused fix are drawn in a Mermaid diagram. The scene and its illustrative data are
+explicitly labelled. No agents run or receive visitor input on the website.
+
+`demo-player.js` types into and frames the real product DOM exported in `site/demo/room/`.
+There is no separate imitation chat UI. Camera moves take around 280 ms, with the next reply
+starting on arrival. Playback offers pause, replay, seeking and chapters; it suspends outside the
+demo destination, outside the visible panel and in a hidden tab. Reduced motion starts on the
+finished scene and permits manual playback.
+
+Regenerate the product fixture after changing dialogue or the diagram:
+
+```sh
+node scripts/export-motion-room.mjs /path/to/product/docs/demo --site
+npm run render
+```
+
+The exporter waits for the actual product's Mermaid renderer and fonts, then saves the rendered
+interface and required assets without the app runtime or fixture payload. It includes the product's
+AGPLv3 licence and font licence. Without `--site`, it still refreshes the earlier standalone study.
+
+## Artwork
+
+The four original illustrations were made with the built-in image_gen tool. Their complete prompts
+and final asset paths are recorded in `scripts/world-art-prompts.json`. The site uses WebP assets
+in `site/assets/world/`, under 1 MB together. `scripts/encode-world-art.mjs <png-directory>`
+encodes generated PNG originals for web delivery, retaining their dimensions and alpha.
+Nunito and all animation assets are local; animation has no CDN dependency. The font licence is in
+`site/assets/fonts/OFL.txt`.
+
+## Verification
+
+```sh
+npm ci
+npx playwright install chromium firefox webkit
+npm run check
+npm test
+npm test -- firefox
+npm test -- webkit
+```
+
+The tests serve the static artifact and cover distinct parallax depths, articulated movement,
+all feature routes and nested guides, history, focus, restored pan and zoom, the investigation,
+diagram drawing, five widths, downloads, reduced motion and the no-JS content.
+`scripts/review-world.mjs <screenshot-directory> [engine]` takes visual review images from a
+local site server at port 4877. Review the actual movement and typography when changing artwork,
+layout, camera timing or the source product styles.
 
 ## The page never carries a version
 

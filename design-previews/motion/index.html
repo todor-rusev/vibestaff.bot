@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>viberoom · ideas in motion</title>
+    <link rel="icon" href="../assets/icon-256.png" />
+    <link rel="stylesheet" href="motion.css" />
+    <script type="module" src="motion.js"></script>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <div class="colour-field field-blue"></div>
+      <div class="colour-field field-coral"></div>
+      <div class="colour-field field-violet"></div>
+      <div class="light-dust"></div>
+      <svg
+        class="light-ribbons"
+        viewBox="0 0 1440 1300"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#ff986c" />
+            <stop offset=".4" stop-color="#ff65bc" />
+            <stop offset=".72" stop-color="#9368ff" />
+            <stop offset="1" stop-color="#58a6ff" />
+          </linearGradient>
+          <filter id="soft"><feGaussianBlur stdDeviation="14" /></filter>
+        </defs>
+        <g fill="none" stroke="url(#ribbon)">
+          <path class="ribbon-glow" d="M-200 820 C330 1080 1120 -350 1600 30" />
+          <path d="M-200 820 C330 1080 1120 -350 1600 30" />
+          <path class="ribbon-fine" d="M-180 890 C390 1070 1080 -210 1580 80" />
+          <path
+            class="ribbon-fine"
+            d="M-220 730 C420 1110 1120 -470 1550 -10"
+          />
+        </g>
+      </svg>
+      <div class="grain"></div>
+    </div>
+    <div class="study-bar">
+      <span><b>06</b> / A STUDY IN MOTION</span
+      ><a href="../?v=5">Earlier visual studies ↗</a>
+    </div>
+    <header class="navigation">
+      <a class="brand" href="#"
+        ><img
+          src="../assets/icon-256.png"
+          width="43"
+          height="43"
+          alt=""
+        />viberoom</a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#demo">See it happen</a><a href="#together">Why a room?</a
+        ><a
+          class="get-app"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Get viberoom <span>↗</span></a
+        >
+      </nav>
+    </header>
+    <main>
+      <section class="introduction">
+        <div class="intro-copy">
+          <p class="eyebrow"><span></span> A LITTLE MORE TOGETHER.</p>
+          <h1>
+            Good ideas<br />love <em>company.</em
+            ><span class="title-spark" aria-hidden="true">✳</span>
+          </h1>
+        </div>
+        <div class="intro-aside">
+          <p>
+            Your favourite AI minds.<br />One shared conversation.<br /><strong
+              >See what happens next.</strong
+            >
+          </p>
+          <a class="watch-link" href="#demo"><span>↓</span> Follow an idea</a>
+        </div>
+      </section>
+      <section
+        class="demo-section"
+        id="demo"
+        aria-label="Animated example conversation in viberoom"
+      >
+        <div class="scene-heading">
+          <span class="scene-live"><i></i> THE ROOM, IN MOTION</span
+          ><span>ONE IDEA. THREE DIFFERENT MINDS.</span>
+        </div>
+        <div class="theatre" id="theatre">
+          <div class="scene-aura" aria-hidden="true"></div>
+          <div class="scene-side-label" aria-hidden="true">
+            IT STARTS WITH YOU.
+          </div>
+          <div class="camera-viewport" id="viewport">
+            <div class="camera" id="camera">
+              <iframe
+                id="room"
+                src="room/index.html"
+                title="The actual viberoom interface playing an example conversation"
+                tabindex="-1"
+              ></iframe>
+            </div>
+            <div class="view-vignette" aria-hidden="true"></div>
+            <div class="load-state" id="load-state">Opening the room…</div>
+          </div>
+          <div class="speaker-cue" id="speaker-cue">
+            <span class="cue-number" id="cue-number">01</span>
+            <div>
+              <span id="cue-name">You</span
+              ><small id="cue-action">An idea enters the room.</small>
+            </div>
+            <span class="cue-wave" aria-hidden="true"
+              ><i></i><i></i><i></i><i></i
+            ></span>
+          </div>
+          <div class="scene-note">
+            <span class="note-star">✳</span
+            ><span
+              >Different minds.<br /><b>Something better, together.</b></span
+            >
+          </div>
+        </div>
+        <div class="playback">
+          <button
+            id="play"
+            class="play-button"
+            aria-label="Pause demo"
+            disabled
+          >
+            Ⅱ
+          </button>
+          <button
+            id="restart"
+            class="restart-button"
+            aria-label="Restart demo"
+            disabled
+          >
+            ↺
+          </button>
+          <label class="seek-label"
+            ><span class="sr-only">Demo position</span
+            ><input
+              id="seek"
+              type="range"
+              min="0"
+              max="36"
+              step=".1"
+              value="0"
+              disabled
+          /></label>
+          <output id="time">00:00 / 00:36</output>
+          <button id="motion-toggle" class="motion-toggle" aria-pressed="true">
+            Parallax on
+          </button>
+        </div>
+        <div class="chapters" aria-label="Choose a moment in the demo">
+          <button data-time="3" aria-current="step">
+            <span>01</span> Your idea <b>↗</b>
+          </button>
+          <button data-time="9">
+            <span>02</span> Nova brings the team <b>↗</b>
+          </button>
+          <button data-time="16"><span>03</span> Kai builds <b>↗</b></button>
+          <button data-time="22">
+            <span>04</span> Rio takes a look <b>↗</b>
+          </button>
+          <button data-time="29"><span>05</span> Back to you <b>↗</b></button>
+        </div>
+        <p class="demo-caption">
+          A scripted example, played in the real viberoom interface. No live
+          agents are running here.
+        </p>
+      </section>
+      <section class="together" id="together">
+        <p class="eyebrow">THERE’S A REASON WE CALL IT A ROOM.</p>
+        <h2>Less back and forth.<br /><em>More building on each other.</em></h2>
+        <div class="thoughts">
+          <p>
+            <span>01 / START WITH AN IDEA</span>You say what you want to do.<br />In
+            your own words.
+          </p>
+          <p>
+            <span>02 / LET THE MINDS MEET</span>Your agents can ask each
+            other,<br />share work, and take a fresh look.
+          </p>
+          <p>
+            <span>03 / STAY IN THE CONVERSATION</span>See how it comes
+            together.<br />Change direction whenever you like.
+          </p>
+        </div>
+        <a
+          class="final-link"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Make room for your next idea <span>↗</span></a
+        >
+        <p class="availability">Free & open source · Windows · macOS · Linux</p>
+      </section>
+    </main>
+    <footer>
+      <a class="brand" href="#">viberoom</a
+      ><span>Good company. Great possibilities.</span
+      ><a href="https://github.com/todor-rusev/viberoom">Made in the open ↗</a>
+    </footer>
+  </body>
+</html>
