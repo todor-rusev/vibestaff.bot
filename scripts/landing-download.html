@@ -1,0 +1,123 @@
+<section id="download">
+  <div class="wrap">
+    <h2 class="reveal">Get viberoom</h2>
+    <p class="lede">
+      Pick your system. The buttons always check for the latest available
+      release.
+    </p>
+    <p class="quiet" data-role="release-line" style="margin-top: -6px"></p>
+
+    <div class="dl-grid">
+      <div class="dl" data-system="windows">
+        <div class="os">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M3 5.5l7.5-1.05v7.05H3V5.5zM11.5 4.3L21 3v8.5h-9.5V4.3zM3 12.5h7.5v7.05L3 18.5v-6zM11.5 12.5H21V21l-9.5-1.3v-7.2z"
+            />
+          </svg>
+          <h3>Windows</h3>
+          <span class="yours" data-role="yours" hidden>your system</span>
+        </div>
+        <p class="what">
+          Windows 10 and 11, 64-bit. Installs for you alone — no administrator.
+        </p>
+        <a
+          class="btn primary"
+          data-role="button"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Download for Windows</a
+        >
+        <div class="alt" data-role="alt"></div>
+        <p class="aside" data-role="aside"></p>
+      </div>
+
+      <div class="dl" data-system="mac">
+        <div class="os">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M17.05 12.04c-.03-3.02 2.47-4.47 2.58-4.54-1.41-2.06-3.6-2.34-4.38-2.37-1.86-.19-3.63 1.1-4.58 1.1-.94 0-2.4-1.07-3.95-1.04-2.03.03-3.9 1.18-4.94 3-2.11 3.66-.54 9.08 1.51 12.05 1 1.45 2.2 3.08 3.76 3.02 1.51-.06 2.08-.98 3.9-.98 1.83 0 2.34.98 3.93.95 1.62-.03 2.65-1.48 3.64-2.94 1.15-1.68 1.62-3.31 1.65-3.4-.04-.02-3.17-1.22-3.2-4.85zM14.47 3.5c.83-1.01 1.39-2.41 1.24-3.8-1.19.05-2.64.79-3.5 1.8-.77.89-1.44 2.32-1.26 3.68 1.33.1 2.69-.67 3.52-1.68z"
+            />
+          </svg>
+          <h3>macOS</h3>
+          <span class="yours" data-role="yours" hidden>your system</span>
+        </div>
+        <p class="what">macOS 11 Big Sur and later, Apple silicon or Intel.</p>
+        <a
+          class="btn primary"
+          data-role="button"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Download for macOS</a
+        >
+        <div class="alt" data-role="alt"></div>
+        <p class="aside" data-role="aside"></p>
+      </div>
+
+      <div class="dl" data-system="linux">
+        <div class="os">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 1.6c-2.3 0-3.8 1.7-3.8 4.1 0 1.2.2 2 .2 2.8 0 1.1-1.4 2.7-2.3 4.4-.7 1.4-1.2 2.7-1.2 3.8 0 1.2.6 1.9 1.4 1.9.5 0 1-.2 1.3-.6.6 1.5 2.3 2.6 4.4 2.6s3.8-1.1 4.4-2.6c.3.4.8.6 1.3.6.8 0 1.4-.7 1.4-1.9 0-1.1-.5-2.4-1.2-3.8-.9-1.7-2.3-3.3-2.3-4.4 0-.8.2-1.6.2-2.8 0-2.4-1.5-4.1-3.8-4.1z"
+            />
+            <circle cx="10.2" cy="6.6" r="1.15" fill="var(--card)" />
+            <circle cx="13.8" cy="6.6" r="1.15" fill="var(--card)" />
+            <path
+              fill="var(--card)"
+              d="M12 8.1c.9 0 1.7.5 1.7 1s-.8 1.1-1.7 1.1-1.7-.6-1.7-1.1.8-1 1.7-1z"
+            />
+          </svg>
+          <h3>Linux</h3>
+          <span class="yours" data-role="yours" hidden>your system</span>
+        </div>
+        <p class="what">
+          One AppImage: make it executable and run it. No package manager, no
+          root.
+        </p>
+        <a
+          class="btn primary"
+          data-role="button"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Download for Linux</a
+        >
+        <div class="alt" data-role="alt"></div>
+        <p class="aside" data-role="aside"></p>
+      </div>
+    </div>
+
+    <div class="fallback" id="npm">
+      <h3>Or install it with npm</h3>
+      <p class="quiet" style="margin: 0">
+        If you already have Node 22.16 or newer, this is the whole installation.
+        It works the same on all three systems, and it updates itself with
+        <code style="padding: 2px 6px">viberoom update</code>.
+      </p>
+      <div class="cmd">
+        <code>npm install -g viberoom</code>
+        <button
+          class="btn ghost sm"
+          type="button"
+          data-copy="npm install -g viberoom"
+        >
+          Copy
+        </button>
+        <a class="btn ghost sm" href="https://www.npmjs.com/package/viberoom"
+          >On npm</a
+        >
+      </div>
+      <p class="quiet" style="margin: 12px 0 0">
+        Then run <code style="padding: 2px 6px">viberoom</code> to open your
+        room.
+      </p>
+    </div>
+
+    <noscript>
+      <p class="quiet" style="margin-top: 20px">
+        This page asks GitHub which release is the newest, which needs
+        JavaScript. Without it, take any file straight from
+        <a href="https://github.com/todor-rusev/viberoom/releases"
+          >the releases page</a
+        >.
+      </p>
+    </noscript>
+  </div>
+</section>

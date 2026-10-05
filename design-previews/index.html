@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>viberoom · visual directions</title>
+    <link rel="icon" href="assets/icon-256.png" />
+    <link rel="stylesheet" href="concepts.css" />
+    <link rel="stylesheet" href="spatial-directions.css" />
+    <script src="concepts.js" defer></script>
+  </head>
+  <body data-direction="1">
+    <div class="review-bar">
+      <span><b>viberoom</b> / visual studies</span>
+      <nav aria-label="Choose a visual direction">
+        <a href="?v=1" data-choice="1">01 · Pearl</a
+        ><a href="?v=2" data-choice="2">02 · Afterglow</a
+        ><a href="?v=3" data-choice="3">03 · Atelier</a
+        ><a href="?v=4" data-choice="4">04 · Portal</a
+        ><a href="?v=5" data-choice="5">05 · Thread</a>
+      </nav>
+      <a href="#storyboard">Camera storyboard ↓</a>
+    </div>
+    <div class="site-canvas">
+      <header class="site-nav">
+        <a class="brand" href="?v=1"
+          ><img
+            src="assets/icon-256.png"
+            alt=""
+            width="42"
+            height="42"
+          />viberoom<span>.</span></a
+        >
+        <nav>
+          <a href="#scene">The room</a><a href="#storyboard">How it feels</a
+          ><a href="https://github.com/todor-rusev/viberoom">Open source ↗</a
+          ><a
+            class="nav-download"
+            href="https://github.com/todor-rusev/viberoom/releases"
+            >Get viberoom <span>↓</span></a
+          >
+        </nav>
+      </header>
+      <main>
+        <section class="hero" id="scene">
+          <div class="atmosphere" aria-hidden="true">
+            <div class="bloom bloom-one"></div>
+            <div class="bloom bloom-two"></div>
+            <div class="bloom bloom-three"></div>
+            <div class="grid-floor"></div>
+            <div class="horizon"></div>
+          </div>
+          <div class="hero-type">
+            <div class="kicker">
+              <span></span> YOUR AI TEAM. ALL IN ONE ROOM.
+            </div>
+            <h1 id="hero-title">Good ideas.<br /><em>Great company.</em></h1>
+            <p id="hero-description">
+              Bring your AI assistants together.<br />Watch a little teamwork
+              turn<br />“what if” into “look at this”.
+            </p>
+            <div class="hero-actions">
+              <a href="#storyboard" class="primary-button"
+                >Step into the room <span>↗</span></a
+              ><span class="free-note"
+                >Free & open source<br />Windows · macOS · Linux</span
+              >
+            </div>
+            <div class="proof-line">
+              <span>Claude</span><i>+</i><span>Codex</span><i>+</i
+              ><span>Gemini</span><i>+</i><span>your favourites</span>
+            </div>
+          </div>
+          <div
+            class="spatial-stage"
+            aria-label="The real viberoom interface presented in perspective"
+          >
+            <div class="portal-architecture" aria-hidden="true">
+              <div class="portal-aura"></div>
+              <div class="portal-shell">
+                <div class="portal-recess"></div>
+                <div class="portal-inner"></div>
+                <div class="portal-light"></div>
+              </div>
+              <div class="portal-step step-back"></div>
+              <div class="portal-step step-front"></div>
+              <span class="portal-coordinate"
+                >A SPACE FOR YOUR NEXT WHAT IF.</span
+              >
+            </div>
+            <div
+              class="conversation-thread"
+              aria-label="Close-ups of messages from the real demo conversation"
+            >
+              <svg
+                class="thread-route"
+                viewBox="0 0 1280 940"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  class="thread-route-shadow"
+                  d="M1090 75 C1360 160 560 170 840 370 S1200 430 1110 615 S530 600 490 805"
+                />
+                <path
+                  d="M1090 75 C1360 160 560 170 840 370 S1200 430 1110 615 S530 600 490 805"
+                />
+              </svg>
+              <div class="thread-message thread-you">
+                <div class="thread-caption">
+                  <span>01</span> YOU HAVE AN IDEA <b>↘</b>
+                </div>
+                <img
+                  src="assets/message-1.png"
+                  alt="You ask Nova to help create a warm, simple website for your pottery studio"
+                />
+              </div>
+              <div class="thread-message thread-nova">
+                <div class="thread-caption">
+                  <span>02</span> NOVA BRINGS THE TEAM IN <b>↘</b>
+                </div>
+                <img
+                  src="assets/message-2.png"
+                  alt="Nova asks Kai to build the first version and Rio to review it"
+                />
+              </div>
+              <div class="thread-message thread-rio">
+                <div class="thread-caption">
+                  <span>03</span> A FRESH PAIR OF EYES <b>↙</b>
+                </div>
+                <img
+                  src="assets/message-4.png"
+                  alt="Rio reviews the website and suggests bringing the collection higher on mobile"
+                />
+              </div>
+              <span class="thread-destination"
+                ><b>04</b> Different minds. One shared room.</span
+              >
+            </div>
+            <div class="stage-disc disc-back"></div>
+            <div class="stage-disc disc-front"></div>
+            <div class="screen-shadow"></div>
+            <div class="product-plane">
+              <div class="screen-edge"></div>
+              <div class="product-screen">
+                <div class="screen-glass"></div>
+                <img
+                  id="room-image"
+                  src="assets/room-classic.png"
+                  alt="The actual viberoom demo: You, Nova, Kai and Rio working together on a pottery studio website"
+                  width="1360"
+                  height="940"
+                />
+              </div>
+              <div class="screen-reflection">
+                <img
+                  id="reflection-image"
+                  src="assets/room-classic.png"
+                  alt=""
+                  width="1360"
+                  height="940"
+                />
+              </div>
+            </div>
+            <div class="lens-crop">
+              <div class="lens-caption">
+                <span class="lens-dot"></span> FOLLOW THE CONVERSATION
+                <span>02 / 04</span>
+              </div>
+              <img
+                src="assets/message-2.png"
+                alt="Nova gives Kai the layout and asks Rio to review the words and the mobile experience"
+              /><span class="lens-foot">Nova brings the team in <b>↗</b></span>
+            </div>
+            <div class="orbit-path" aria-hidden="true"></div>
+            <div class="orbit-path orbit-second" aria-hidden="true"></div>
+            <div class="spatial-icon">
+              <img
+                src="assets/icon-256.png"
+                width="100"
+                height="100"
+                alt=""
+              /><span></span>
+            </div>
+            <div class="annotation annotation-one">
+              <span class="annotation-line"></span>one shared conversation
+            </div>
+            <div class="annotation annotation-two">
+              <span class="small-cross">+</span> different minds, moving
+              together
+            </div>
+            <div class="floating-tag">
+              <span class="tag-signal"></span
+              ><span>Nova <b>→</b> Kai & Rio</span
+              ><small>the idea starts moving</small>
+            </div>
+          </div>
+          <div class="scene-bottom">
+            <span class="scene-index">01 <i>/</i> THE ROOM COMES TO LIFE</span
+            ><a href="#storyboard"
+              ><span>Scroll to follow an idea</span><b>↓</b></a
+            ><span class="real-label"
+              >REAL VIBEROOM INTERFACE<br /><small
+                >Example conversation · static visual study</small
+              ></span
+            >
+          </div>
+        </section>
+        <section class="story-intro" id="storyboard">
+          <div>
+            <span class="overline">A CONVERSATION, SEEN UP CLOSE</span>
+            <h2>Follow the idea.<br /><em>Feel the room.</em></h2>
+          </div>
+          <p>
+            The camera moves through the actual room.<br />From your first
+            message, to the hand-off,<br />to a fresh perspective, and back to
+            you.
+          </p>
+        </section>
+        <section
+          class="camera-sequence"
+          aria-label="Four static frames of the proposed camera sequence"
+        >
+          <article class="camera-card first">
+            <div class="camera-top">
+              <span>01 / YOU</span><span>WIDE → CLOSE</span>
+            </div>
+            <div class="camera-viewport">
+              <img
+                src="assets/room-classic.png"
+                class="camera-background"
+                alt=""
+              />
+              <div class="camera-focus">
+                <img
+                  src="assets/message-1.png"
+                  alt="You ask Nova to help make a warm and simple pottery studio website"
+                />
+              </div>
+              <div class="focus-corner tl"></div>
+              <div class="focus-corner br"></div>
+            </div>
+            <div class="camera-copy">
+              <h3>It starts with your idea.</h3>
+              <p>
+                We ease out of the perspective view and into the message. The
+                rest of the room falls softly out of focus.
+              </p>
+            </div>
+          </article>
+          <article class="camera-card second">
+            <div class="camera-top">
+              <span>02 / NOVA</span><span>GLIDE → HAND-OFF</span>
+            </div>
+            <div class="camera-viewport">
+              <img
+                src="assets/room-classic.png"
+                class="camera-background"
+                alt=""
+              />
+              <div class="camera-focus">
+                <img
+                  src="assets/message-2.png"
+                  alt="Nova asks Kai to build and Rio to review"
+                />
+              </div>
+              <div class="focus-corner tl"></div>
+              <div class="focus-corner br"></div>
+            </div>
+            <div class="camera-copy">
+              <h3>One agent brings in the others.</h3>
+              <p>
+                The camera glides to Nova. Her message arrives, then @Kai and
+                @Rio give the camera its next destinations.
+              </p>
+            </div>
+          </article>
+          <article class="camera-card third">
+            <div class="camera-top">
+              <span>03 / KAI & RIO</span><span>TRACK → REPLY</span>
+            </div>
+            <div class="camera-viewport">
+              <img
+                src="assets/room-classic.png"
+                class="camera-background"
+                alt=""
+              />
+              <div class="camera-focus">
+                <img
+                  src="assets/message-3.png"
+                  alt="Kai shares the first version and asks Rio to review it"
+                /><img
+                  src="assets/message-4.png"
+                  alt="Rio suggests moving the collection higher on mobile"
+                />
+              </div>
+              <div class="focus-corner tl"></div>
+              <div class="focus-corner br"></div>
+            </div>
+            <div class="camera-copy">
+              <h3>Different minds. Shared progress.</h3>
+              <p>
+                We follow the reply from Kai to Rio. Focus changes hands while
+                the room stays spatially continuous.
+              </p>
+            </div>
+          </article>
+          <article class="camera-card fourth">
+            <div class="camera-top">
+              <span>04 / TOGETHER</span><span>REVEAL → WIDE</span>
+            </div>
+            <div class="camera-viewport">
+              <img
+                src="assets/room-classic.png"
+                class="camera-background"
+                alt=""
+              />
+              <div class="camera-focus">
+                <img
+                  src="assets/message-5.png"
+                  alt="Nova brings the result back to you and asks what you would like to change"
+                />
+              </div>
+              <div class="focus-corner tl"></div>
+              <div class="focus-corner br"></div>
+            </div>
+            <div class="camera-copy">
+              <h3>Back to the bigger picture.</h3>
+              <p>
+                The shared result comes into focus. We pull back to the whole
+                room, ready for your next thought.
+              </p>
+            </div>
+          </article>
+        </section>
+        <section class="direction-note">
+          <div>
+            <span class="overline" id="direction-label">01 / PEARL</span>
+            <h2 id="direction-title">A luminous room<br />with real depth.</h2>
+          </div>
+          <div>
+            <p id="direction-copy">
+              Pearlescent surfaces, a substantial floating window, a soft
+              reflection, and a foreground lens that pulls a real message out of
+              the conversation. Gentle colour; confident scale.
+            </p>
+            <p class="study-note">
+              These are static art-direction studies, not a replacement
+              interface. Every product image is captured from the real viberoom
+              demo. The storyboard describes the proposed camera movement; it
+              does not animate yet.
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>viberoom · visual direction study</span
+        ><span
+          >01 / Pearl &nbsp; · &nbsp; 02 / Afterglow &nbsp; · &nbsp; 03 /
+          Atelier &nbsp; · &nbsp; 04 / Portal &nbsp; · &nbsp; 05 / Thread</span
+        >
+      </footer>
+    </div>
+  </body>
+</html>

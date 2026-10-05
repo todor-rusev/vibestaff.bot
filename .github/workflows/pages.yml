@@ -30,6 +30,11 @@ jobs:
       - name: Gate — pages present, links resolve, leak scan clean
         run: node scripts/check.mjs
 
+      - name: Restore temporary content
+        env:
+          SITE_OVERLAY_KEY: ${{ secrets.SITE_OVERLAY_KEY }}
+        run: node scripts/restore-temporary-content.mjs
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true

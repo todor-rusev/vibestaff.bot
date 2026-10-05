@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Make room for your next idea. A beautiful desktop home for your AI agents, with lasting conversations, useful connections and you in control."
+    />
+    <title>viberoom — room for your next thing</title>
+    <link rel="icon" href="assets/icon.png" />
+    <link rel="stylesheet" href="assets/fonts.css" />
+    <link rel="stylesheet" href="studio.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+      <a class="brand" href="#"
+        ><img
+          src="assets/icon.png"
+          alt=""
+          width="40"
+          height="40"
+        />viberoom<span>by vibestaff</span></a
+      >
+      <nav aria-label="Explore">
+        <a href="#make">Make something</a><a href="#remember">Keep the thread</a
+        ><a href="#connect">Bring your world</a>
+      </nav>
+      <a class="pill ink" href="#get">Get viberoom <span>↗</span></a>
+    </header>
+    <main id="main">
+      <section class="hero" id="make">
+        <p class="eyebrow">
+          <span class="live-dot"></span> YOUR AGENT. YOUR COMPUTER. YOUR
+          POSSIBILITIES.
+        </p>
+        <h1>
+          Room for<br />your next
+          <em
+            >thing<svg viewBox="0 0 420 28" aria-hidden="true">
+              <path d="M5 19Q170 0 411 12M51 24Q239 9 390 20" /></svg
+            >.</em
+          >
+        </h1>
+        <p class="hero-copy">
+          A beautiful desktop home for the AI agents you already use.<br />Talk
+          naturally. Make things. Keep the good stuff.
+        </p>
+        <div class="hero-actions">
+          <button class="pill coral" data-demo="play">
+            Step inside <span>↗</span></button
+          ><span class="availability"
+            >Free & open source<br />Windows · macOS · Linux</span
+          >
+        </div>
+        <div class="studio-table">
+          <div class="margin-note">
+            <span>01 / FROM THOUGHT TO SOMETHING</span
+            ><svg viewBox="0 0 110 90" aria-hidden="true">
+              <path d="M6 9C-6 85 80 93 85 20M69 34L86 18l12 18" />
+            </svg>
+          </div>
+          <div class="room-poster">
+            <div class="window-top">
+              <span><i></i> THE NEXT CHAPTER</span
+              ><span>A room. An idea. A beginning.</span
+              ><button
+                data-demo="room"
+                aria-label="Explore the real viberoom window"
+              >
+                ↗
+              </button>
+            </div>
+            <button
+              class="poster-image"
+              data-demo="room"
+              aria-label="Open the actual viberoom demo"
+            >
+              <img
+                src="assets/room-classic.png"
+                width="1920"
+                height="1275"
+                alt="The actual viberoom window: Nova turns an idea into a dependency diagram"
+              /><span class="enter-room"><i>↗</i> Explore this room</span>
+            </button>
+            <div class="window-bottom">
+              <span>Real viberoom · fictional example</span
+              ><button data-demo="play">
+                Watch an idea take shape <span>▶</span>
+              </button>
+            </div>
+          </div>
+          <div class="side-note">
+            <span class="asterisk">✳</span
+            ><strong>One agent<br />is plenty.</strong>
+            <p>Invite another when a second perspective helps.</p>
+          </div>
+        </div>
+        <div class="agent-strip">
+          <span>KEEP YOUR FAVOURITE</span
+          ><b><img src="demo/vendor-icons/claude.svg" alt="" />Claude Code</b
+          ><b><img src="demo/vendor-icons/codex.svg" alt="" />Codex</b
+          ><b><img src="demo/vendor-icons/gemini.svg" alt="" />Gemini</b
+          ><b><img src="demo/vendor-icons/cursor.svg" alt="" />Cursor</b
+          ><span>and more ↗</span>
+        </div>
+      </section>
+      <section class="manifesto">
+        <p>Same agent.<br /><span>A different feeling.</span></p>
+        <div>
+          <p>
+            Your familiar requests, in a room that gives replies, files and
+            diagrams space to breathe.
+          </p>
+          <p>
+            No need to turn every task into a team project. Start with you and
+            one agent. Let the room grow when you want it to.
+          </p>
+          <button class="text-link" data-demo="room">
+            Meet the room <span>↗</span>
+          </button>
+        </div>
+      </section>
+      <section class="memory-section" id="remember">
+        <div class="section-label">02 / THE THREAD STAYS WITH YOU</div>
+        <div class="memory-grid">
+          <div class="memory-words">
+            <h2>Your best thinking.<br />Still <em>here.</em></h2>
+            <p>
+              Tomorrow. A month from now. A year later.<br />The whole
+              conversation stays with its room.
+            </p>
+            <button class="pill paper" data-demo="search">
+              Find the old decision <span>↗</span>
+            </button>
+            <details>
+              <summary>History, pins & memory <span>+</span></summary>
+              <p>
+                Keep the complete history on your computer. Pin a useful
+                message, or search for a phrase. For recall by meaning, enable
+                an optional long-term memory provider and choose which rooms it
+                may remember.
+              </p>
+            </details>
+          </div>
+          <div class="archive">
+            <div class="archive-heading">
+              <span>FROM THE EXAMPLE ROOM</span
+              ><button
+                id="pin-note"
+                aria-pressed="false"
+                aria-label="Pin this example note"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m8 3 8 0-1 7 3 4H6l3-4-1-7Zm4 11v7" /></svg
+                ><span>Keep this</span>
+              </button>
+            </div>
+            <div class="paper-stack">
+              <div class="paper-behind"></div>
+              <article class="memory-note" id="memory-note">
+                <span class="note-date" id="note-date"
+                  >28 SEP 2025 · MESSAGE #2</span
+                >
+                <div class="note-author">
+                  <img
+                    src="demo/faces/fox.webp"
+                    alt=""
+                    width="38"
+                    height="38"
+                  /><span>Nova<small>The next chapter</small></span>
+                </div>
+                <blockquote id="note-quote">
+                  “Guest checkout comes first. Keep account creation optional,
+                  after the order.”
+                </blockquote>
+                <p id="note-foot">
+                  A decision made once. A reference you can come back to.
+                </p>
+                <span class="note-stamp" id="pin-stamp" hidden>PINNED ↗</span>
+              </article>
+            </div>
+            <div class="time-travel">
+              <span>THEN</span
+              ><label for="year"
+                ><span class="sr-only"
+                  >Move from the original decision to the current plan</span
+                ><input
+                  id="year"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="1"
+                  value="0" /></label
+              ><span>NOW</span>
+            </div>
+            <p class="archive-hint">
+              Move through a year. The room keeps the thread.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="tools-section" id="connect">
+        <div class="tools-heading">
+          <p class="eyebrow">03 / BRING YOUR WORLD IN</p>
+          <h2>Your tools.<br />On speaking <em>terms.</em></h2>
+          <p>
+            Connect the places your work lives.<br />Give your agent the context
+            to do something useful.
+          </p>
+        </div>
+        <div class="connection-stage">
+          <div class="connection-lines" aria-hidden="true">
+            <svg viewBox="0 0 640 300">
+              <path id="wire-notion" d="M105 65C230 65 150 170 320 170" />
+              <path id="wire-sentry" d="M535 65C430 65 490 170 320 170" />
+              <path id="wire-linear" d="M105 245C230 245 150 170 320 170" />
+              <path id="wire-wolfram" d="M535 245C430 245 490 170 320 170" />
+            </svg>
+          </div>
+          <div class="connection-center">
+            <img
+              src="assets/icon.png"
+              width="84"
+              height="84"
+              alt="viberoom"
+            /><span>Your room</span>
+          </div>
+          <button
+            class="service notion"
+            data-service="notion"
+            aria-pressed="true"
+          >
+            <span class="service-mark">N</span><b>Notion</b></button
+          ><button
+            class="service sentry"
+            data-service="sentry"
+            aria-pressed="false"
+          >
+            <span class="service-mark">↗</span><b>Sentry</b></button
+          ><button
+            class="service linear"
+            data-service="linear"
+            aria-pressed="false"
+          >
+            <span class="service-mark">◒</span><b>Linear</b></button
+          ><button
+            class="service wolfram"
+            data-service="wolfram"
+            aria-pressed="false"
+          >
+            <span class="service-mark">✳</span><b>Wolfram</b>
+          </button>
+          <div class="connection-caption">
+            <span id="service-tag">NOTES → CONTEXT</span>
+            <p id="service-copy">
+              Bring the project brief into the conversation.
+            </p>
+            <button class="text-link" data-demo="connections">
+              See Connections <span>↗</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="skill-strip">
+        <div class="skill-label">
+          <span>/</span
+          ><strong>A little know-how.<br />A repeatable superpower.</strong>
+        </div>
+        <div>
+          <p>
+            A skill saves the way you like something done. Call it by name next
+            time.
+          </p>
+          <button class="text-link" data-demo="skills">
+            Take a look at Skills ↗
+          </button>
+        </div>
+        <div class="skill-ticket" aria-hidden="true">
+          <small>YOUR WAY OF WORKING</small><b>/make-a-plan</b
+          ><span>Ask. Organise. Check. Deliver.</span>
+        </div>
+      </section>
+      <section class="comfort-section" id="comfort">
+        <div>
+          <p class="eyebrow">04 / COMFORT IS A FEATURE</p>
+          <h2>Feels like <em>you.</em></h2>
+          <p>
+            Choose the look. Set your pace. Keep control.<br />The room can be
+            quiet, colourful, focused — yours.
+          </p>
+        </div>
+        <div class="looks" role="group" aria-label="Choose a product look">
+          <button data-look="classic" aria-pressed="true">
+            <i class="daylight"></i>Daylight</button
+          ><button data-look="classic-dark" aria-pressed="false">
+            <i class="night"></i>After hours</button
+          ><button data-look="clay" aria-pressed="false">
+            <i class="clay"></i>Warm clay
+          </button>
+        </div>
+        <button
+          class="look-preview"
+          data-demo="look"
+          aria-label="Open this look in the actual product"
+        >
+          <img
+            id="look-image"
+            src="assets/room-classic.png"
+            alt="viberoom in the Daylight look"
+            width="1920"
+            height="1275"
+            loading="lazy"
+          /><span>Try this look <i>↗</i></span>
+        </button>
+        <p class="control-caption">
+          <span>Clear permissions.</span><span>Visible work.</span
+          ><span>A stop button when you need it.</span>
+        </p>
+      </section>
+      <section class="two-doors">
+        <article class="phone-door">
+          <p class="eyebrow">05 / THE ROOM GOES WITH YOU</p>
+          <h2>Out of office.<br /><em>Still in the room.</em></h2>
+          <p>
+            Pick up the conversation on your phone through Telegram. Read,
+            reply, or stop a running agent.
+          </p>
+          <button class="pill paper" data-demo="mobile">
+            Take the room along <span>↗</span></button
+          ><small>Your computer stays awake with viberoom running.</small
+          ><svg class="flight" viewBox="0 0 200 160" aria-hidden="true">
+            <path
+              class="flight-trail"
+              d="M2 140C60 150 125 145 118 114S50 65 61 93 121 105 168 40"
+            />
+            <g class="plane">
+              <path d="m146 37 44-18-15 44-10-17-19-9Z" />
+              <path d="m165 46 25-27" />
+            </g>
+          </svg>
+        </article>
+        <article class="open-door">
+          <p class="eyebrow">06 / OPEN BY NATURE</p>
+          <h2>Good rooms<br />are built <em>together.</em></h2>
+          <p>
+            Free, open source, and ready for your ideas. Read the code. Shape
+            what comes next.
+          </p>
+          <a class="pill ink" href="https://github.com/todor-rusev/viberoom"
+            >Open the source <span>↗</span></a
+          ><small>AGPLv3 · Your agents keep their own accounts and costs.</small
+          ><span class="open-symbol" aria-hidden="true">{&nbsp;}</span>
+        </article>
+      </section>
+      <section class="closing" id="get">
+        <p class="eyebrow">YOUR NEXT THING STARTS SOMEWHERE.</p>
+        <h2>
+          Make <em>room.</em
+          ><img src="assets/icon.png" width="100" height="100" alt="" />
+        </h2>
+        <p>Start with one room and the agent you already know.</p>
+        <a
+          class="pill coral"
+          href="https://github.com/todor-rusev/viberoom/releases/latest"
+          >Get viberoom <span>↗</span></a
+        ><a class="npm" href="https://www.npmjs.com/package/viberoom"
+          >Prefer npm? ↗</a
+        ><small
+          >Windows · macOS · Linux<br />Free app. AI and optional services have
+          their own plans.</small
+        >
+      </section>
+    </main>
+    <footer>
+      <a class="brand" href="#"
+        ><img src="assets/icon.png" alt="" width="28" height="28" />viberoom</a
+      ><span>A little space for a lot of possibility.</span
+      ><a href="https://github.com/todor-rusev/viberoom">GitHub ↗</a
+      ><a href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html"
+        >Full demo ↗</a
+      >
+    </footer>
+    <dialog id="studio" aria-labelledby="studio-title">
+      <div class="studio-head">
+        <div>
+          <span class="studio-dot"></span
+          ><b id="studio-title">Step inside the room</b
+          ><small>Actual viberoom · fictional example · no live AI calls</small>
+        </div>
+        <button id="close-studio" aria-label="Close the interactive room">
+          Close ×
+        </button>
+      </div>
+      <nav class="studio-actions" aria-label="Try the room">
+        <button data-action="room" aria-pressed="true">Explore</button
+        ><button data-action="play" aria-pressed="false">
+          Two perspectives ▶</button
+        ><button data-action="search" aria-pressed="false">
+          Find a decision</button
+        ><button data-action="pins" aria-pressed="false">Pins</button
+        ><button data-action="connections" aria-pressed="false">
+          Connections</button
+        ><button data-action="skills" aria-pressed="false">Skills</button
+        ><button id="stop-scene" hidden>Pause Ⅱ</button>
+      </nav>
+      <div class="demo-view">
+        <iframe
+          id="demo"
+          data-src="demo/"
+          title="Interactive viberoom product demo"
+        ></iframe>
+        <div id="demo-loading">
+          <span class="load-ring"></span><b>Making room…</b>
+        </div>
+      </div>
+      <div class="studio-bottom">
+        <span id="demo-caption" role="status"
+          >Explore the room. All content here is an authored example.</span
+        ><a href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html"
+          >Open the full demo ↗</a
+        >
+      </div>
+    </dialog>
+    <script type="module" src="studio.js"></script>
+  </body>
+</html>

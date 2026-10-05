@@ -1,208 +1,178 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>viberoom — one chat, many coding agents · presented by vibestaff</title>
-<meta name="description" content="Open a room, summon the coding agents you already have, give each one a role, and let them work it out with you and with each other. Free and open source, for Windows, macOS and Linux.">
-<link rel="canonical" href="https://vibestaff.bot/">
-<meta name="theme-color" content="#eef0fb" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f1024" media="(prefers-color-scheme: dark)">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="vibestaff.bot">
-<meta property="og:title" content="viberoom — one chat, many coding agents">
-<meta property="og:description" content="Claude, Codex, Gemini, Cursor, OpenCode, Copilot — whichever you have installed, in one room, with your own logins. Free and open source.">
-<meta property="og:url" content="https://vibestaff.bot/">
-<meta property="og:image" content="https://vibestaff.bot/assets/img/room.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/favicon.ico" sizes="any">
-<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/assets/icon-256.png">
-<link rel="stylesheet" href="/assets/site.css">
-<script>document.documentElement.classList.add("js");</script>
-</head>
-<body>
-
-<!-- The opening: a bot draws itself, its room forms around it, and the page comes out of that. Skippable
-     with any press or scroll, gone entirely under reduced motion, and removed from the document when it
-     has played — a decoration that stays in the DOM is a decoration that will eventually be in the way. -->
-<div class="boot" id="boot">
-  <svg class="boot-art" viewBox="0 0 220 220" aria-hidden="true">
-    <circle class="ring r1" cx="110" cy="110" r="70"/>
-    <circle class="ring r2" cx="110" cy="110" r="92"/>
-    <g class="boot-bot">
-      <path class="wireless" d="M110 62V44"/><circle class="knob" cx="110" cy="40" r="6"/>
-      <rect class="head" x="66" y="62" width="88" height="70" rx="26"/>
-      <circle class="eye" cx="92" cy="94" r="7.5"/><circle class="eye" cx="128" cy="94" r="7.5"/>
-      <path class="mouth" d="M94 114h32"/>
-    </g>
-    <g class="boot-mates">
-      <g><rect x="16" y="150" width="34" height="28" rx="10"/><circle cx="26" cy="164" r="2.6"/><circle cx="40" cy="164" r="2.6"/></g>
-      <g><rect x="93" y="166" width="34" height="28" rx="10"/><circle cx="103" cy="180" r="2.6"/><circle cx="117" cy="180" r="2.6"/></g>
-      <g><rect x="170" y="150" width="34" height="28" rx="10"/><circle cx="180" cy="164" r="2.6"/><circle cx="194" cy="164" r="2.6"/></g>
-    </g>
-  </svg>
-  <p class="boot-word"><span class="boot-who">vibestaff presents</span><span class="boot-what">viberoom</span></p>
-</div>
-
-<!-- The world behind the page: an aurora that drifts, a floor that recedes, and motes that rise. Three
-     layers, no library, nothing but transform and opacity — and all of it off under reduced motion. -->
-<div class="world" aria-hidden="true">
-  <span class="aurora a1"></span><span class="aurora a2"></span><span class="aurora a3"></span>
-  <span class="floor"></span>
-  <span class="motes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-</div>
-
-<header class="bar">
-  <div class="wrap">
-    <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="30" height="30">viberoom</a>
-    <nav>
-      <a class="hide-sm" href="#what">What it does</a>
-      <a class="hide-sm" href="#how">How it works</a>
-      <a class="hide-sm" href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html">Demo</a>
-      <a class="hide-sm" href="https://github.com/todor-rusev/viberoom">GitHub</a>
-      <a class="btn primary sm" href="#download">Download</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-<section class="hero">
-  <div class="wrap cols">
-    <div class="rise">
-      <span class="eyebrow sk"><b>vibestaff</b> presents · free and open source · your own agent logins</span>
-      <h1 class="sk">One chat, <em>many</em> coding agents.</h1>
-      <p class="lede sk">Open a room, summon the agents you already have, give each one a role, and let them
-      work it out — with you and with each other. Everything ever said in a room stays with the room.</p>
-      <div class="hero-cta sk">
-        <a class="btn primary" href="#download">
-          <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg>
-          Download viberoom
-        </a>
-        <a class="btn ghost" href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html">See it first — nothing to install</a>
-      </div>
-      <p class="quiet hero-note sk">Windows, macOS and Linux. It runs on your computer, talks to the agent CLIs you have already logged in, and sends your conversations nowhere.</p>
-      <div class="vendors sk">
-        <span>Claude</span><span>Codex</span><span>Gemini</span><span>Cursor</span>
-        <span>OpenCode</span><span>GitHub Copilot</span><span>Grok Build</span><span>Hermes Agent</span>
-      </div>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Your AI agent, a beautiful room, and a world of possibilities. Explore memory, skills, connections and useful collaboration. Free and open source."><meta name="theme-color" content="#edf2e6"><title>viberoom · a little room, big possibilities</title><link rel="canonical" href="https://vibestaff.bot/"><link rel="icon" href="assets/icon-256.png"><link rel="stylesheet" href="assets/world.css"><link rel="stylesheet" href="assets/film.css"><script type="module" src="assets/world.js"></script><script type="module" src="assets/demo-player.js"></script><script defer src="assets/download.js"></script></head><body>
+<div class="atmosphere" aria-hidden="true"><span class="wash wash-mint"></span><span class="wash wash-peach"></span><span class="wash wash-lilac"></span><div class="sky-grain"></div></div>
+<header class="site-header"><a class="brand" href="#/map"><img src="assets/icon-256.png" width="38" height="38" alt="">viberoom</a><span class="brand-note">Your agent. Your world.</span><nav aria-label="Main navigation"><a href="#/map">Explore</a><a href="#/demo">See it happen</a><a class="get-app" href="#/download">Come on in ↗</a></nav></header>
+<nav class="breadcrumbs" aria-label="Your place in the world"><button id="go-back">← Go back</button><a href="#/map">The room</a><span id="crumb-path"></span></nav>
+<main><section id="world" class="world-viewport" aria-label="Explore the viberoom world"><div class="world-layer back-layer" data-depth=".25"><div class="world-orbit"></div><span class="back-word">room to think.</span><span class="back-word second">space to be you.</span></div><div class="world-layer link-layer" data-depth=".7"><svg id="room-map" viewBox="0 0 1800 1120" aria-hidden="true"><path class="world-link" data-link="interface" d="M900 575 Q702.5 345 345 275"/><path class="world-link" data-link="memory" d="M900 575 Q990 302.5 920 190"/><path class="world-link" data-link="skills" d="M900 575 Q1270 365 1480 315"/><path class="world-link" data-link="control" d="M900 575 Q1255 622.5 1450 830"/><path class="world-link" data-link="open" d="M900 575 Q997.5 702.5 935 990"/><path class="world-link" data-link="mobile" d="M900 575 Q705 630 350 845"/><path class="world-link" data-link="download" d="M900 575 Q1337.5 742.5 1615 1070"/></svg></div><div class="world-layer node-layer" data-depth="1"><a class="world-node node-interface" data-route="interface" data-feature="interface" data-x="345" data-y="275" data-tint="violet" href="#/interface" style="left:345px;top:275px"><div class="node-art"><div class="picture-art art-studio"><img class="" src="assets/world/studio.webp" alt="" draggable="false" width="480" height="440"><span class="idea-spark">✳</span></div></div><div class="node-caption"><span class="node-kicker">One familiar interface</span><h2>Your agent, at home <span>↗</span></h2></div></a>
+<a class="world-node node-memory" data-route="memory" data-feature="memory" data-x="920" data-y="190" data-tint="mint" href="#/memory" style="left:920px;top:190px"><div class="node-art"><div class="picture-art art-memory"><img class="" src="assets/world/memory.webp" alt="" draggable="false" width="480" height="440"><span class="paper-rig"><i></i><i></i><i></i></span></div></div><div class="node-caption"><span class="node-kicker">History · pins · meaning</span><h2>A memory that stays <span>↗</span></h2></div></a>
+<a class="world-node node-skills" data-route="skills" data-feature="skills" data-x="1480" data-y="315" data-tint="coral" href="#/skills" style="left:1480px;top:315px"><div class="node-art"><div class="picture-art art-connections"><img class="" src="assets/world/connections.webp" alt="" draggable="false" width="480" height="440"><span class="current-particle p1"></span><span class="current-particle p2"></span></div></div><div class="node-caption"><span class="node-kicker">Skills &amp; connections</span><h2>Open up possibilities <span>↗</span></h2></div></a>
+<a class="world-node node-control" data-route="control" data-feature="control" data-x="1450" data-y="830" data-tint="blue" href="#/control" style="left:1450px;top:830px"><div class="node-art"><div class="control-sculpture"><div class="control-housing"><span class="dial"><i></i></span><span class="slider slider-one"><i></i></span><span class="slider slider-two"><i></i></span><span class="control-light"></span><b>YOUR PACE</b></div><span class="control-key">Ⅱ</span></div></div><div class="node-caption"><span class="node-kicker">Your pace. Your call.</span><h2>Make it your own <span>↗</span></h2></div></a>
+<a class="world-node node-open" data-route="open" data-feature="open" data-x="935" data-y="990" data-tint="lime" href="#/open" style="left:935px;top:990px"><div class="node-art"><div class="open-sculpture"><span class="bracket left-bracket">{</span><img src="assets/icon-256.png" width="100" height="100" alt=""/><span class="bracket right-bracket">}</span><span class="open-tag">AGPLv3</span></div></div><div class="node-caption"><span class="node-kicker">Open source · AGPLv3</span><h2>Free to make it yours <span>↗</span></h2></div></a>
+<a class="world-node node-mobile" data-route="mobile" data-feature="mobile" data-x="350" data-y="845" data-tint="orchid" href="#/mobile" style="left:350px;top:845px"><div class="node-art"><div class="picture-art art-mobile"><img class="" src="assets/world/mobile.webp" alt="" draggable="false" width="480" height="440"><span class="flying-letter">↗</span></div></div><div class="node-caption"><span class="node-kicker">Your room, on your phone</span><h2>Go where life goes <span>↗</span></h2></div></a>
+<a class="world-node node-demo" data-route="demo"  data-x="900" data-y="575" data-tint="coral" href="#/demo" style="left:900px;top:575px"><div class="node-art"><div class="room-art"><span class="room-orbit orbit-one"></span><span class="room-orbit orbit-two"></span><img class="room-logo" src="assets/icon-256.png" width="140" height="140" alt=""/><span class="mate mate-coral" aria-hidden="true"><svg viewBox="0 0 150 170"><defs><linearGradient id="body-fox" x2="1" y2="1"><stop stop-color="var(--mate-light)"/><stop offset="1" stop-color="var(--mate-dark)"/></linearGradient></defs><ellipse class="mate-shadow" cx="75" cy="155" rx="44" ry="8"/><g class="mate-body"><path d="M48 85Q75 67 102 85L108 128Q75 145 42 128Z" fill="url(#body-fox)"/><g class="arm arm-left"><path d="M47 88Q22 98 24 119"/><circle cx="24" cy="119" r="10"/></g><g class="arm arm-right"><path d="M102 88Q127 78 124 53"/><circle cx="124" cy="53" r="10"/></g><path class="mate-foot" d="M57 135l-7 14M91 135l8 14"/></g><image class="mate-head" href="demo/room/faces/fox.webp" x="30" y="0" width="90" height="95"/></svg></span><span class="mate mate-blue" aria-hidden="true"><svg viewBox="0 0 150 170"><defs><linearGradient id="body-raccoon" x2="1" y2="1"><stop stop-color="var(--mate-light)"/><stop offset="1" stop-color="var(--mate-dark)"/></linearGradient></defs><ellipse class="mate-shadow" cx="75" cy="155" rx="44" ry="8"/><g class="mate-body"><path d="M48 85Q75 67 102 85L108 128Q75 145 42 128Z" fill="url(#body-raccoon)"/><g class="arm arm-left"><path d="M47 88Q22 98 24 119"/><circle cx="24" cy="119" r="10"/></g><g class="arm arm-right"><path d="M102 88Q127 78 124 53"/><circle cx="124" cy="53" r="10"/></g><path class="mate-foot" d="M57 135l-7 14M91 135l8 14"/></g><image class="mate-head" href="demo/room/faces/raccoon.webp" x="30" y="0" width="90" height="95"/></svg></span><span class="thought thought-one">What if…</span><span class="thought thought-two">Let’s try.</span></div></div><div class="node-caption"><span class="eyebrow">VIBEROOM · YOUR AGENT’S WORLD</span><h1>A little room.<br>Big <em>possibilities.</em></h1><p>Start with one agent.<br>Open up a world around it.</p><span class="watch-pill">▶ Watch a useful collaboration</span></div></a>
+<a class="world-node node-download" data-route="download"  data-x="1615" data-y="1070" data-tint="mint" href="#/download" style="left:1615px;top:1070px"><div class="node-art"><div class="download-art">↘</div></div><div class="node-caption"><span class="node-kicker">Get viberoom</span><h2>Come on in <span>↗</span></h2></div></a></div><div class="world-layer front-layer" data-depth="1.8" aria-hidden="true"><span class="glass-ring ring-a"></span><span class="glass-ring ring-b"></span><span class="ribbon-piece"></span><span class="loose-paper"></span></div></section>
+<section id="journey" aria-label="Inside a possibility"><div class="journey-scroll"><section class="destination" data-page="interface" id="feature-interface"><p class="eyebrow">One familiar place</p><h2 tabindex="-1">Your agent. A better everyday interface.</h2><p class="destination-intro">Keep the AI agent you know. Give it a room you enjoy spending time in. Claude, Codex, Gemini and other supported CLI agents share the same clear interface in viberoom.</p><div class="feature-points"><section><h3>Start with just one</h3><p>A room with you and one agent is a complete way to use viberoom. Add a colleague whenever another perspective would help.</p></section><section><h3>Keep your way of asking</h3><p>Use your own words, familiar requests and the agent’s capabilities. The conversation stays familiar even when you switch agents.</p></section><section><h3>Make it feel like you</h3><p>Choose a look, a comfortable font and the scale that suits your screen. Files, diagrams and messages have room to breathe.</p></section></div><a class="dive-link" href="#/interface/how">Make it happen <span>Take a closer look ↘</span></a><a class="text-link" href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html">Explore the real interface ↗</a></section><section class="destination guide" data-page="interface/how"><p class="eyebrow">One familiar place / GET STARTED</p><h2 tabindex="-1">Make it<br><em>happen.</em></h2><ol><li><span>01</span><p>Open a room and choose its working folder.</p></li><li><span>02</span><p>Add your preferred agent and use its own sign-in.</p></li><li><span>03</span><p>Start a conversation. Invite another agent only when you want to.</p></li></ol><a class="dive-link" href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html">Explore the real interface ↗</a><a class="text-link" href="#/interface">← Back to one familiar place</a></section>
+<section class="destination" data-page="memory" id="feature-memory"><p class="eyebrow">Pick up where you left off</p><h2 tabindex="-1">A year later is still the same room.</h2><p class="destination-intro">The room keeps the whole conversation on your computer. A restart or a new agent session doesn’t make the earlier messages disappear. Come back tomorrow — or a year from now.</p><div class="feature-points"><section><h3>Every word has a place</h3><p>Search the room’s history and return to the original messages. Pin the decisions, references and replies you want close at hand.</p></section><section><h3>Search by meaning</h3><p>Enable long-term memory for semantic recall: relevant remembered facts can return when you ask about an idea in different words.</p></section><section><h3>You choose what remembers</h3><p>Choose a memory provider and the rooms it may learn from. Full conversation history remains a separate record; it doesn’t require that optional service.</p></section></div><a class="dive-link" href="#/memory/how">Make it happen <span>Take a closer look ↘</span></a><a class="text-link" href="https://github.com/todor-rusev/viberoom#what-they-remember">See how memory works ↗</a></section><section class="destination guide" data-page="memory/how"><p class="eyebrow">Pick up where you left off / GET STARTED</p><h2 tabindex="-1">Make it<br><em>happen.</em></h2><ol><li><span>01</span><p>Keep talking in the same room; its history stays there.</p></li><li><span>02</span><p>Pin an important message so it is easy to revisit.</p></li><li><span>03</span><p>For semantic recall, open Settings → Long-term memory and choose the provider and rooms.</p></li></ol><a class="dive-link" href="https://github.com/todor-rusev/viberoom#what-they-remember">See how memory works ↗</a><a class="text-link" href="#/memory">← Back to pick up where you left off</a></section>
+<section class="destination" data-page="skills" id="feature-skills"><p class="eyebrow">Bring your world in</p><h2 tabindex="-1">Your ways of working. Your favourite tools.</h2><p class="destination-intro">Teach the room a repeatable way of doing something with a skill. Connect the services where your work lives so an agent can find the page, issue or reference you mean.</p><div class="feature-points"><section><h3>A skill is a reusable how-to</h3><p>Keep instructions for a recurring task and call the skill by name. Share the same approach with the agents that need it.</p></section><section><h3>Connections open the right doors</h3><p>Choose a service from Connections, sign in, and decide which rooms may use it. Your own compatible server can join the catalogue too.</p></section><section><h3>Review what gets written</h3><p>Access keys are entered on a private card. Before a connected system is changed, you can review the exact request and approve it.</p></section></div><a class="dive-link" href="#/skills/how">Make it happen <span>Take a closer look ↘</span></a><a class="text-link" href="https://github.com/todor-rusev/viberoom">Browse the project guide ↗</a></section><section class="destination guide" data-page="skills/how"><p class="eyebrow">Bring your world in / GET STARTED</p><h2 tabindex="-1">Make it<br><em>happen.</em></h2><ol><li><span>01</span><p>Open Skills to add a workflow, or ask a vibemate to help create one.</p></li><li><span>02</span><p>Open Connections and choose the system you want to use.</p></li><li><span>03</span><p>Sign in, choose access, then ask your agent to use it in a real task.</p></li></ol><a class="dive-link" href="https://github.com/todor-rusev/viberoom">Browse the project guide ↗</a><a class="text-link" href="#/skills">← Back to bring your world in</a></section>
+<section class="destination" data-page="control" id="feature-control"><p class="eyebrow">Stay in charge</p><h2 tabindex="-1">A light interface. The controls you need.</h2><p class="destination-intro">You don’t need to become an IT specialist to follow the conversation. Open a room, say what you need, and see what the agent is doing. The controls are there when you want them.</p><div class="feature-points"><section><h3>Keep the conversation clear</h3><p>Separate projects into rooms. Address one agent, talk to everyone, or work quietly with a single assistant.</p></section><section><h3>Pause the noise</h3><p>Stop a reply or hush the room. Review requested permissions and choose when work continues.</p></section><section><h3>Keep the work close</h3><p>Rooms work with a folder you choose. Your conversation history stays on your computer; agents and optional connected services use their own providers.</p></section></div><a class="dive-link" href="#/control/how">Make it happen <span>Take a closer look ↘</span></a><a class="text-link" href="#/download">Start with a room ↗</a></section><section class="destination guide" data-page="control/how"><p class="eyebrow">Stay in charge / GET STARTED</p><h2 tabindex="-1">Make it<br><em>happen.</em></h2><ol><li><span>01</span><p>Choose a room for the thing you want to do.</p></li><li><span>02</span><p>Follow the replies and review permission requests as they appear.</p></li><li><span>03</span><p>Use Stop or Hush whenever you need to change direction.</p></li></ol><a class="dive-link" href="#/download">Start with a room ↗</a><a class="text-link" href="#/control">← Back to stay in charge</a></section>
+<section class="destination" data-page="open" id="feature-open"><p class="eyebrow">Open by nature</p><h2 tabindex="-1">Read it. Change it. Make it yours.</h2><p class="destination-intro">viberoom is open source under the AGPLv3 licence. You can inspect how it works, report a problem, contribute an improvement or adapt it under the licence.</p><div class="feature-points"><section><h3>The source is there</h3><p>Explore the code and development on GitHub. The way the product works is something you can inspect.</p></section><section><h3>A free home for your agents</h3><p>viberoom is free. Your AI agents and any optional external services keep their own accounts, plans and usage costs.</p></section><section><h3>A project you can help shape</h3><p>Bring a suggestion, an issue or a contribution. Better rooms can come from the people who use them.</p></section></div><a class="dive-link" href="#/open/how">Make it happen <span>Take a closer look ↘</span></a><a class="text-link" href="https://github.com/todor-rusev/viberoom">Open on GitHub ↗</a></section><section class="destination guide" data-page="open/how"><p class="eyebrow">Open by nature / GET STARTED</p><h2 tabindex="-1">Make it<br><em>happen.</em></h2><ol><li><span>01</span><p>Open the repository and explore the guide.</p></li><li><span>02</span><p>Check the licence and the issue tracker.</p></li><li><span>03</span><p>Try the app, share feedback or contribute a change.</p></li></ol><a class="dive-link" href="https://github.com/todor-rusev/viberoom">Open on GitHub ↗</a><a class="text-link" href="#/open">← Back to open by nature</a></section>
+<section class="destination" data-page="mobile" id="feature-mobile"><p class="eyebrow">Take the room with you</p><h2 tabindex="-1">A thought doesn’t wait for your desk.</h2><p class="destination-intro">Pair Telegram once and your rooms come with you. Read an agent’s reply, send the next thought or stop a running response from the phone in your pocket.</p><div class="feature-points"><section><h3>Same room, another way in</h3><p>Replies arrive in Telegram and your answers return to the room. Use /rooms to find the rooms that are open.</p></section><section><h3>Choose what travels</h3><p>Keep any room off the phone from that room’s settings. Pairing uses your own Telegram bot and a private key card.</p></section><section><h3>Your computer does the work</h3><p>Keep the computer awake and viberoom running while you use the phone. Telegram is the mobile connection to that room.</p></section></div><a class="dive-link" href="#/mobile/how">Make it happen <span>Take a closer look ↘</span></a><a class="text-link" href="https://github.com/todor-rusev/viberoom#from-your-phone">Read the phone guide ↗</a></section><section class="destination guide" data-page="mobile/how"><p class="eyebrow">Take the room with you / GET STARTED</p><h2 tabindex="-1">Make it<br><em>happen.</em></h2><ol><li><span>01</span><p>Ask a vibemate to help set up Telegram.</p></li><li><span>02</span><p>Create your bot, enter its key on the private card and pair your phone.</p></li><li><span>03</span><p>Send /rooms in Telegram and carry on with the conversation.</p></li></ol><a class="dive-link" href="https://github.com/todor-rusev/viberoom#from-your-phone">Read the phone guide ↗</a><a class="text-link" href="#/mobile">← Back to take the room with you</a></section><section class="destination film-destination" data-page="demo"><section
+  class="demo-section"
+  id="demo"
+  aria-label="An example investigation in the real viberoom interface"
+>
+  <div class="film-heading">
+    <div>
+      <p class="eyebrow">A SECOND MIND. A DIFFERENT CHECK.</p>
+      <h2>Find the cause.<br /><em>Before the rollback.</em></h2>
     </div>
-      <div class="stage reveal">
-        <svg class="scene" viewBox="0 0 560 440" role="img" aria-label="Four vibemates and you around one room: messages travelling to the middle and answers coming back">
-          <!-- the wires first, so everything else sits on top of them -->
-          <path id="w1" class="wire" d="M104 118 C 150 150, 172 160, 186 178"/>
-          <path id="w2" class="wire" d="M456 118 C 410 150, 388 160, 374 178"/>
-          <path id="w3" class="wire" d="M104 330 C 150 300, 172 290, 186 272"/>
-          <path id="w4" class="wire" d="M456 330 C 410 300, 388 290, 374 272"/>
-          <path id="w5" class="wire" d="M280 392 C 280 370, 280 360, 280 336"/>
-
-          <!-- the room: one chat, and the lines of it arriving one after another -->
-          <rect class="room-glow" x="176" y="112" width="208" height="216" rx="30"/>
-          <rect class="room" x="176" y="112" width="208" height="216" rx="30"/>
-          <g class="lines">
-            <g class="line l1"><circle cx="196" cy="146" r="7"/><rect x="210" y="139" width="104" height="8" rx="4"/><rect x="210" y="152" width="70" height="8" rx="4"/></g>
-            <g class="line l2 mine"><rect x="246" y="180" width="118" height="8" rx="4"/><rect x="292" y="193" width="72" height="8" rx="4"/></g>
-            <g class="line l3"><circle cx="196" cy="230" r="7"/><rect x="210" y="223" width="88" height="8" rx="4"/><rect x="210" y="236" width="112" height="8" rx="4"/></g>
-            <g class="line l4"><circle cx="196" cy="282" r="7"/><rect x="210" y="275" width="120" height="8" rx="4"/></g>
-          </g>
-
-          <!-- what travels: a question out to everyone, an answer back from each -->
-          <circle class="pulse" r="5"><animateMotion dur="2.9s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#w1"/></animateMotion></circle>
-          <circle class="pulse" r="5"><animateMotion dur="3.4s" begin="-1.1s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#w2"/></animateMotion></circle>
-          <circle class="pulse" r="5"><animateMotion dur="3.1s" begin="-2.2s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#w3"/></animateMotion></circle>
-          <circle class="pulse" r="5"><animateMotion dur="3.7s" begin="-0.6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#w4"/></animateMotion></circle>
-          <circle class="pulse me-pulse" r="5.5"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#w5"/></animateMotion></circle>
-
-          <g class="bot" data-tint="violet" transform="translate(80 94) scale(1.0)">
-          <path class="wireless" d="M24 13V6"/><circle class="knob" cx="24" cy="4" r="2.8"/>
-          <rect class="head" x="5" y="13" width="38" height="30" rx="12"/>
-          <circle class="eye" cx="17" cy="26" r="3.3"/><circle class="eye" cx="31" cy="26" r="3.3"/>
-          <path class="mouth" d="M18.5 34.5h11"/>
-        </g>
-          <g class="bot" data-tint="mint" transform="translate(432 94) scale(1.0)">
-          <path class="wireless" d="M24 13V6"/><circle class="knob" cx="24" cy="4" r="2.8"/>
-          <rect class="head" x="5" y="13" width="38" height="30" rx="12"/>
-          <circle class="eye" cx="17" cy="26" r="3.3"/><circle class="eye" cx="31" cy="26" r="3.3"/>
-          <path class="mouth" d="M18.5 34.5h11"/>
-        </g>
-          <g class="bot" data-tint="amber" transform="translate(80 306) scale(1.0)">
-          <path class="wireless" d="M24 13V6"/><circle class="knob" cx="24" cy="4" r="2.8"/>
-          <rect class="head" x="5" y="13" width="38" height="30" rx="12"/>
-          <circle class="eye" cx="17" cy="26" r="3.3"/><circle class="eye" cx="31" cy="26" r="3.3"/>
-          <path class="mouth" d="M18.5 34.5h11"/>
-        </g>
-          <g class="bot" data-tint="sky" transform="translate(432 306) scale(1.0)">
-          <path class="wireless" d="M24 13V6"/><circle class="knob" cx="24" cy="4" r="2.8"/>
-          <rect class="head" x="5" y="13" width="38" height="30" rx="12"/>
-          <circle class="eye" cx="17" cy="26" r="3.3"/><circle class="eye" cx="31" cy="26" r="3.3"/>
-          <path class="mouth" d="M18.5 34.5h11"/>
-        </g>
-
-          <!-- you, at the near edge of the room -->
-          <g class="me" transform="translate(256 392)">
-            <rect class="head" x="0" y="0" width="48" height="40" rx="14"/>
-            <circle class="eye" cx="15" cy="17" r="3"/><circle class="eye" cx="33" cy="17" r="3"/>
-            <path class="smile" d="M16 27c3 3.4 13 3.4 16 0"/>
-          </g>
-        </svg>
-        <p class="stage-note">Your <b>vibemates</b>: the agents in the room with you. Ask once; they answer you, and each other.</p>
+    <p>
+      Orders fell after a release. One agent traces the data, another the code.
+      The first explanation almost fits. Almost.
+    </p>
+  </div>
+  <div class="theatre" id="theatre">
+    <div class="camera-viewport" id="viewport">
+      <div class="camera" id="camera">
+        <iframe
+          id="room"
+          src="demo/room/index.html"
+          title="The actual viberoom interface playing an authored example"
+          aria-hidden="true"
+          tabindex="-1"
+        ></iframe>
       </div>
+      <div id="load-state">Opening the room…</div>
+    </div>
+    <div class="speaker-cue">
+      <span id="cue-number">01</span>
+      <div>
+        <b id="cue-name">You</b
+        ><small id="cue-action">The question that matters.</small>
+      </div>
+      <span class="cue-wave" aria-hidden="true"
+        ><i></i><i></i><i></i><i></i
+      ></span>
+    </div>
   </div>
-</section>
-
-<section class="showcase">
-  <div class="wrap">
-    <h2 class="reveal">And this is the real thing</h2>
-    <p class="lede reveal">Not a mock-up: the window as it is, with the tool calls, the file previews and the
-    diagrams of an actual afternoon.</p>
-    <a class="frame reveal" href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html">
-      <img class="only-light" src="/assets/img/room.png" width="1919" height="1149" alt="A viberoom room: three vibemates working through a CSV parser, with their file previews and the room's own timeline" loading="lazy">
-      <img class="only-dark" src="/assets/img/room-dark.png" width="1919" height="1149" alt="The same room after dark" loading="lazy">
-      <span class="frame-cta">Open the live demo &rarr;</span>
-    </a>
+  <div class="playback">
+    <button id="play" aria-label="Pause demo" disabled>Ⅱ</button
+    ><button id="restart" aria-label="Restart demo" disabled>↺</button
+    ><label class="seek-label"
+      ><span class="sr-only">Demo position</span
+      ><input
+        id="seek"
+        type="range"
+        min="0"
+        max="34"
+        step=".1"
+        value="0"
+        disabled /></label
+    ><output id="time">00:00</output>
   </div>
-</section>
+  <div class="chapters" aria-label="Jump to a moment"><button data-time="0.3"><span>01</span>The question</button><button data-time="3.8"><span>02</span>Two evidence trails</button><button data-time="7.3"><span>03</span>A pattern</button><button data-time="11"><span>04</span>First explanation</button><button data-time="14.3"><span>05</span>The challenge</button><button data-time="18.1"><span>06</span>A better conclusion</button><button data-time="21.8"><span>07</span>Verify the fix</button><button data-time="25.5"><span>08</span>Connect the evidence</button></div>
+  <p class="demo-caption">
+    An illustrative investigation in the real interface. The conversation and
+    data are scripted.
+  </p>
+  <div class="film-payoff">
+    <p><b>Different evidence.</b> Analytics on one side. Code on the other.</p>
+    <p>
+      <b>A useful challenge.</b> The second check changes the first conclusion.
+    </p>
+    <p>
+      <b>A concrete finish.</b> A cause, a focused fix and a regression case.
+    </p>
+  </div>
+  <details class="transcript"><summary>Read the investigation <span>+</span></summary><ol><li><strong>You</strong><p>@Nova Orders are down 18% since Tuesday’s release. Traffic, pricing or checkout? Find the cause before we roll back.</p></li><li><strong>Nova</strong><p>@Kai Take sessions and checkout events. I’ll compare the code and the release. Let’s find where the paths meet.</p></li><li><strong>Kai</strong><p>Traffic and desktop conversion are steady. The drop is mobile Safari, after Apply coupon. I’ll trace that path.</p></li><li><strong>Nova</strong><p>The new coupon request can time out before payment. That could explain the failed submits. I’ll prepare a rollback.</p></li><li><strong>Kai</strong><p>Wait: desktop has the same timeouts. Only mobile remounts the payment form when the coupon error is dismissed.</p></li><li><strong>Nova</strong><p>You’re right. The remount clears the payment token; the timeout only triggers it. Keep the release. Fix the form lifecycle.</p></li><li><strong>Kai</strong><p>Replay confirms it: keep the form mounted and payment succeeds. I’ll add timeout + retry to the regression tests.</p></li><li><strong>Nova</strong><p>Root cause found. The data narrowed the path. The code explained it. The second check changed the fix.
 
-<section id="download">
+</p></li><li><strong>The cause</strong><p>Coupon timeout → Safari dismisses the error → payment form remounts → payment token is lost → order fails. Fix: keep the form mounted, then verify with a replay and a regression test.</p></li></ol></details>
+  <a
+    class="text-link"
+    href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html"
+    >Explore the interactive product demo ↗</a
+  >
+</section>
+</section><section class="destination download-destination" data-page="download"><section id="download">
   <div class="wrap">
     <h2 class="reveal">Get viberoom</h2>
-    <p class="lede">One file, installed for you alone — no administrator, nothing in the system PATH.</p>
-    <p class="quiet" data-role="release-line" style="margin-top:-6px"></p>
+    <p class="lede">
+      Pick your system. The buttons always check for the latest available
+      release.
+    </p>
+    <p class="quiet" data-role="release-line" style="margin-top: -6px"></p>
 
     <div class="dl-grid">
       <div class="dl" data-system="windows">
         <div class="os">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.05v7.05H3V5.5zM11.5 4.3L21 3v8.5h-9.5V4.3zM3 12.5h7.5v7.05L3 18.5v-6zM11.5 12.5H21V21l-9.5-1.3v-7.2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M3 5.5l7.5-1.05v7.05H3V5.5zM11.5 4.3L21 3v8.5h-9.5V4.3zM3 12.5h7.5v7.05L3 18.5v-6zM11.5 12.5H21V21l-9.5-1.3v-7.2z"
+            />
+          </svg>
           <h3>Windows</h3>
           <span class="yours" data-role="yours" hidden>your system</span>
         </div>
-        <p class="what">Windows 10 and 11, 64-bit. Installs for you alone — no administrator.</p>
-        <a class="btn primary" data-role="button" href="https://github.com/todor-rusev/viberoom/releases">Download for Windows</a>
+        <p class="what">
+          Windows 10 and 11, 64-bit. Installs for you alone — no administrator.
+        </p>
+        <a
+          class="btn primary"
+          data-role="button"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Download for Windows</a
+        >
         <div class="alt" data-role="alt"></div>
         <p class="aside" data-role="aside"></p>
       </div>
 
       <div class="dl" data-system="mac">
         <div class="os">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-3.02 2.47-4.47 2.58-4.54-1.41-2.06-3.6-2.34-4.38-2.37-1.86-.19-3.63 1.1-4.58 1.1-.94 0-2.4-1.07-3.95-1.04-2.03.03-3.9 1.18-4.94 3-2.11 3.66-.54 9.08 1.51 12.05 1 1.45 2.2 3.08 3.76 3.02 1.51-.06 2.08-.98 3.9-.98 1.83 0 2.34.98 3.93.95 1.62-.03 2.65-1.48 3.64-2.94 1.15-1.68 1.62-3.31 1.65-3.4-.04-.02-3.17-1.22-3.2-4.85zM14.47 3.5c.83-1.01 1.39-2.41 1.24-3.8-1.19.05-2.64.79-3.5 1.8-.77.89-1.44 2.32-1.26 3.68 1.33.1 2.69-.67 3.52-1.68z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M17.05 12.04c-.03-3.02 2.47-4.47 2.58-4.54-1.41-2.06-3.6-2.34-4.38-2.37-1.86-.19-3.63 1.1-4.58 1.1-.94 0-2.4-1.07-3.95-1.04-2.03.03-3.9 1.18-4.94 3-2.11 3.66-.54 9.08 1.51 12.05 1 1.45 2.2 3.08 3.76 3.02 1.51-.06 2.08-.98 3.9-.98 1.83 0 2.34.98 3.93.95 1.62-.03 2.65-1.48 3.64-2.94 1.15-1.68 1.62-3.31 1.65-3.4-.04-.02-3.17-1.22-3.2-4.85zM14.47 3.5c.83-1.01 1.39-2.41 1.24-3.8-1.19.05-2.64.79-3.5 1.8-.77.89-1.44 2.32-1.26 3.68 1.33.1 2.69-.67 3.52-1.68z"
+            />
+          </svg>
           <h3>macOS</h3>
           <span class="yours" data-role="yours" hidden>your system</span>
         </div>
         <p class="what">macOS 11 Big Sur and later, Apple silicon or Intel.</p>
-        <a class="btn primary" data-role="button" href="https://github.com/todor-rusev/viberoom/releases">Download for macOS</a>
+        <a
+          class="btn primary"
+          data-role="button"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Download for macOS</a
+        >
         <div class="alt" data-role="alt"></div>
         <p class="aside" data-role="aside"></p>
       </div>
 
       <div class="dl" data-system="linux">
         <div class="os">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1.6c-2.3 0-3.8 1.7-3.8 4.1 0 1.2.2 2 .2 2.8 0 1.1-1.4 2.7-2.3 4.4-.7 1.4-1.2 2.7-1.2 3.8 0 1.2.6 1.9 1.4 1.9.5 0 1-.2 1.3-.6.6 1.5 2.3 2.6 4.4 2.6s3.8-1.1 4.4-2.6c.3.4.8.6 1.3.6.8 0 1.4-.7 1.4-1.9 0-1.1-.5-2.4-1.2-3.8-.9-1.7-2.3-3.3-2.3-4.4 0-.8.2-1.6.2-2.8 0-2.4-1.5-4.1-3.8-4.1z"/><circle cx="10.2" cy="6.6" r="1.15" fill="var(--card)"/><circle cx="13.8" cy="6.6" r="1.15" fill="var(--card)"/><path fill="var(--card)" d="M12 8.1c.9 0 1.7.5 1.7 1s-.8 1.1-1.7 1.1-1.7-.6-1.7-1.1.8-1 1.7-1z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 1.6c-2.3 0-3.8 1.7-3.8 4.1 0 1.2.2 2 .2 2.8 0 1.1-1.4 2.7-2.3 4.4-.7 1.4-1.2 2.7-1.2 3.8 0 1.2.6 1.9 1.4 1.9.5 0 1-.2 1.3-.6.6 1.5 2.3 2.6 4.4 2.6s3.8-1.1 4.4-2.6c.3.4.8.6 1.3.6.8 0 1.4-.7 1.4-1.9 0-1.1-.5-2.4-1.2-3.8-.9-1.7-2.3-3.3-2.3-4.4 0-.8.2-1.6.2-2.8 0-2.4-1.5-4.1-3.8-4.1z"
+            />
+            <circle cx="10.2" cy="6.6" r="1.15" fill="var(--card)" />
+            <circle cx="13.8" cy="6.6" r="1.15" fill="var(--card)" />
+            <path
+              fill="var(--card)"
+              d="M12 8.1c.9 0 1.7.5 1.7 1s-.8 1.1-1.7 1.1-1.7-.6-1.7-1.1.8-1 1.7-1z"
+            />
+          </svg>
           <h3>Linux</h3>
           <span class="yours" data-role="yours" hidden>your system</span>
         </div>
-        <p class="what">One AppImage: make it executable and run it. No package manager, no root.</p>
-        <a class="btn primary" data-role="button" href="https://github.com/todor-rusev/viberoom/releases">Download for Linux</a>
+        <p class="what">
+          One AppImage: make it executable and run it. No package manager, no
+          root.
+        </p>
+        <a
+          class="btn primary"
+          data-role="button"
+          href="https://github.com/todor-rusev/viberoom/releases"
+          >Download for Linux</a
+        >
         <div class="alt" data-role="alt"></div>
         <p class="aside" data-role="aside"></p>
       </div>
@@ -210,157 +180,41 @@
 
     <div class="fallback" id="npm">
       <h3>Or install it with npm</h3>
-      <p class="quiet" style="margin:0">If you already have Node 22.16 or newer, this is the whole installation. It works the
-      same on all three systems, and it updates itself with <code style="padding:2px 6px">viberoom update</code>.</p>
+      <p class="quiet" style="margin: 0">
+        If you already have Node 22.16 or newer, this is the whole installation.
+        It works the same on all three systems, and it updates itself with
+        <code style="padding: 2px 6px">viberoom update</code>.
+      </p>
       <div class="cmd">
         <code>npm install -g viberoom</code>
-        <button class="btn ghost sm" type="button" data-copy="npm install -g viberoom">Copy</button>
-        <a class="btn ghost sm" href="https://www.npmjs.com/package/viberoom">On npm</a>
+        <button
+          class="btn ghost sm"
+          type="button"
+          data-copy="npm install -g viberoom"
+        >
+          Copy
+        </button>
+        <a class="btn ghost sm" href="https://www.npmjs.com/package/viberoom"
+          >On npm</a
+        >
       </div>
-      <p class="quiet" style="margin:12px 0 0">Then <code style="padding:2px 6px">viberoom</code> opens the room in your browser.</p>
+      <p class="quiet" style="margin: 12px 0 0">
+        Then run <code style="padding: 2px 6px">viberoom</code> to open your
+        room.
+      </p>
     </div>
 
     <noscript>
-      <p class="quiet" style="margin-top:20px">This page asks GitHub which release is the newest, which needs JavaScript.
-      Without it, take any file straight from <a href="https://github.com/todor-rusev/viberoom/releases">the releases page</a>.</p>
+      <p class="quiet" style="margin-top: 20px">
+        This page asks GitHub which release is the newest, which needs
+        JavaScript. Without it, take any file straight from
+        <a href="https://github.com/todor-rusev/viberoom/releases"
+          >the releases page</a
+        >.
+      </p>
     </noscript>
   </div>
 </section>
-
-<section id="how">
-  <div class="wrap band">
-    <h2 class="reveal">Three steps, and the room is yours</h2>
-    <p class="lede">viberoom brings no agent of its own and asks for no key. It uses the agent command-line
-    tools already installed on your computer, with the accounts you have already signed into.</p>
-    <div class="steps">
-      <div>
-        <h3>Open a room</h3>
-        <p>A room has a folder, a topic and rules you write in plain words. Start from a template or empty.</p>
-      </div>
-      <div>
-        <h3>Summon your agents</h3>
-        <p>Whichever of them you have — Claude, Codex, Gemini, Cursor, OpenCode, Copilot. Each one gets a name, a face and a role.</p>
-      </div>
-      <div>
-        <h3>Talk to the room</h3>
-        <p>Address one with <b>@Name</b> or everyone at once. They answer you, they answer each other, and one click stops all of them.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="what">
-  <div class="wrap">
-    <h2 class="reveal">Six reasons it is not just another chat</h2>
-    <p class="lede reveal">Each one is a thing the room does for you while you are looking somewhere else.</p>
-    <div class="stack">
-      <article class="card" data-tint="violet" data-side="left">
-        <div class="card-body">
-          <span class="card-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-          <h3>It remembers everything</h3>
-          <p>Every word ever said in a room stays with it. Ask about a decision from a year ago and a vibemate reads it back — with the message number, so you can check it yourself.</p>
-        </div>
-        <span class="card-glow" aria-hidden="true"></span>
-      </article>
-      <article class="card" data-tint="mint" data-side="right">
-        <div class="card-body">
-          <span class="card-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 3v4M8.5 12v1.5M15.5 12v1.5M9.5 16h5"/></svg></span>
-          <h3>The bots you already have</h3>
-          <p>Claude, Codex, Gemini, Cursor, OpenCode, Copilot, Grok, Hermes. Your own installations, your own logins. viberoom brings no agent of its own and asks for no key.</p>
-        </div>
-        <span class="card-glow" aria-hidden="true"></span>
-      </article>
-      <article class="card" data-tint="amber" data-side="left">
-        <div class="card-body">
-          <span class="card-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v13"/><path d="M5 19h14M9 8h6M9 12h4"/></svg></span>
-          <h3>Rules they actually follow</h3>
-          <p>Write how the team works — when to disagree, what to check first, what never to do — in plain words. The room carries it into every turn, for every agent.</p>
-        </div>
-        <span class="card-glow" aria-hidden="true"></span>
-      </article>
-      <article class="card" data-tint="peach" data-side="right">
-        <div class="card-body">
-          <span class="card-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="4"/><path d="M3 10h18M8 3v4M16 3v4M12 14v2.5l2 1.2"/></svg></span>
-          <h3>Work that runs on a schedule</h3>
-          <p>A reminder at five, a task for one vibemate every morning, a job when viberoom starts. The window can be closed; the room keeps its appointments.</p>
-        </div>
-        <span class="card-glow" aria-hidden="true"></span>
-      </article>
-      <article class="card" data-tint="sky" data-side="left">
-        <div class="card-body">
-          <span class="card-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6z"/><path d="M9.3 12.2l1.9 1.9 3.5-3.7"/></svg></span>
-          <h3>Nothing leaves your computer</h3>
-          <p>The hub runs on localhost. Conversations, files and logins stay on the machine. What other rooms may see is your call, and nobody else's.</p>
-        </div>
-        <span class="card-glow" aria-hidden="true"></span>
-      </article>
-      <article class="card" data-tint="orchid" data-side="right">
-        <div class="card-body">
-          <span class="card-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3.5"/><path d="M10.5 18.2h3"/><path d="M9 7.5h6M9 11h4"/></svg></span>
-          <h3>The room in your pocket</h3>
-          <p>Pair Telegram and read the room, answer it, or approve what a vibemate is asking for — from the sofa, the bus, or anywhere that is not your desk.</p>
-        </div>
-        <span class="card-glow" aria-hidden="true"></span>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap band center">
-    <h2>A decision from a year ago, read back with its number</h2>
-    <p class="lede" style="margin:0 auto 22px">Restarts, new sessions and a thousand other messages in between:
-    the record stays with the room, not in anyone&rsquo;s head.</p>
-    <img src="/assets/img/memory.svg" width="960" height="300" alt="A question about something said a year ago, and a vibemate answering with that message's number" loading="lazy">
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2 class="reveal">See it before you install it</h2>
-    <p class="lede">Two rooms, six vibemates, one afternoon — recorded as pages that run the real viberoom
-    window with no hub behind them. Walk between the rooms, open the participants, change the look.</p>
-    <div class="looks">
-      <a href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html"><img src="/assets/img/look-vibeclassic.webp" width="460" height="288" alt="VibeClassic" loading="lazy"><b>VibeClassic — lavender light, soft tiles</b></a>
-      <a href="https://todor-rusev.github.io/viberoom/demo/vibeclassic-dark.html"><img src="/assets/img/look-vibeclassic-dark.webp" width="460" height="288" alt="VibeClassic Dark" loading="lazy"><b>VibeClassic Dark — navy paper, nothing glares</b></a>
-      <a href="https://todor-rusev.github.io/viberoom/demo/clay.html"><img src="/assets/img/look-clay.webp" width="460" height="288" alt="Clay" loading="lazy"><b>Clay — sand, terracotta and teal</b></a>
-      <a href="https://todor-rusev.github.io/viberoom/demo/eye-comfort.html"><img src="/assets/img/look-eye-comfort.webp" width="460" height="288" alt="Eye Comfort" loading="lazy"><b>Eye Comfort — cream, grey, air between the lines</b></a>
-      <a href="https://todor-rusev.github.io/viberoom/demo/3d-clayful.html"><img src="/assets/img/look-3d-clayful.webp" width="460" height="288" alt="3D clayful" loading="lazy"><b>3D clayful — real volume, light from the left</b></a>
-      <a href="https://todor-rusev.github.io/viberoom/demo/terminal.html"><img src="/assets/img/look-terminal.webp" width="460" height="288" alt="Terminal" loading="lazy"><b>Terminal — phosphor green, hairlines</b></a>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap band">
-    <h2 class="reveal">What it needs</h2>
-    <ul class="need">
-      <li><b>Windows</b> 10 or 11 · <b>macOS</b> 11+ · <b>Linux</b> with a desktop</li>
-      <li><b>At least one agent CLI</b> installed and signed in</li>
-      <li><b>Node 22.16+</b> — only for the npm installation</li>
-      <li><b>No account with us</b>, no key, no subscription</li>
-    </ul>
-    <p class="quiet" style="margin-top:18px">viberoom is AGPL-3.0. The source, the issues and every release are on
-    <a href="https://github.com/todor-rusev/viberoom">GitHub</a>.</p>
-  </div>
-</section>
-
-</main>
-
-<footer>
-  <div class="wrap">
-    <span><b>vibestaff</b> presents viberoom</span>
-    <nav>
-      <a href="#download">Download</a>
-      <a href="https://github.com/todor-rusev/viberoom">GitHub</a>
-      <a href="https://www.npmjs.com/package/viberoom">npm</a>
-      <a href="https://github.com/todor-rusev/viberoom/blob/main/LICENSE">AGPL-3.0</a>
-      <a href="https://todor-rusev.github.io/viberoom/demo/vibeclassic.html">Demo</a>
-    </nav>
-  </div>
-</footer>
-
-<script src="/assets/download.js" defer></script>
-<script src="/assets/alive.js" defer></script>
-</body>
-</html>
+<div id="how" class="start-note"><h3>Start with just one.</h3><p>Make a room, choose your agent and start a conversation. Add another mind when an independent check would help.</p></div></section></div><nav class="related-nodes" aria-label="Keep exploring"><a href="#/interface">One familiar place</a><a href="#/memory">Pick up where you left off</a><a href="#/skills">Bring your world in</a><a href="#/control">Stay in charge</a><a href="#/open">Open by nature</a><a href="#/mobile">Take the room with you</a></nav></section></main>
+<footer class="world-controls"><div class="explore-hint"><span class="hint-dot"></span> Drag to wander. Choose a world.</div><div class="map-controls"><button id="zoom-out" aria-label="Zoom out">−</button><button id="reset-view" aria-label="Return to the full map">⌖</button><button id="zoom-in" aria-label="Zoom in">+</button></div><button id="motion-toggle" aria-pressed="true">Motion on</button><a class="source-link" href="https://github.com/todor-rusev/viberoom">Open source ↗</a></footer><div class="sr-only" id="route-status" aria-live="polite"></div>
+<noscript><style>.world-viewport,.breadcrumbs,.world-controls{display:none}.destination{display:block!important}#journey{position:static;display:block}body{overflow:auto}.theatre,.playback,.chapters{display:none}</style><p class="noscript-note">Explore the guides below. Turn on JavaScript for the spatial map and animated investigation.</p></noscript></body></html>
