@@ -6,7 +6,8 @@
     "render": "node scripts/render-world.mjs",
     "publish:preview": "node scripts/publish-preview.mjs",
     "check": "node scripts/check.mjs",
-    "test": "node scripts/tour.test.mjs"
+    "test": "node scripts/tour.test.mjs",
+    "render:privacy": "node scripts/render-privacy.mjs"
   },
   "devDependencies": {
     "playwright": "1.63.0"

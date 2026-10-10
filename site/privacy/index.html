@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — viberoom</title>
+<meta name="description" content="What viberoom keeps, where it keeps it, and what leaves your computer.">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="30" height="30">viberoom</a>
+  <nav><a class="btn primary sm" href="/#download">Download</a></nav>
+</div></header>
+<main><section class="wrap" style="padding:80px 0;max-width:760px">
+  <h1>viberoom privacy policy</h1>
+  <p>Last updated: 10 October 2026</p>
+  <p>viberoom brings the AI coding assistants you already use into one conversation. It runs on your computer, as a desktop application or as a command installed from npm. This page says what viberoom does with your information.</p>
+  <h2>What viberoom does not do</h2>
+  <ul>
+    <li>There is no viberoom account and no viberoom server. Your conversations are never sent to the people who make viberoom.</li>
+    <li>viberoom collects no analytics, telemetry or crash reports, shows no advertising and does not track you.</li>
+    <li>We do not sell, rent or share personal information, because we do not receive any.</li>
+  </ul>
+  <h2>What stays on your computer</h2>
+  <ul>
+    <li>Your rooms, their messages, the files you attach, your settings and viberoom's logs are kept in viberoom's data folder in your user profile (<code>.viberoom</code> in your home folder unless you choose another). viberoom limits the folder to your user account where the system allows it.</li>
+    <li>Keys you give viberoom for optional services are stored encrypted, with a master key held by your operating system's own key store: Windows Data Protection (DPAPI), the macOS Keychain, or the Secret Service on Linux.</li>
+  </ul>
+  <h2>What leaves your computer, and when</h2>
+  <p><strong>Your AI coding assistants.</strong> viberoom starts the assistants you have installed and signed in to, such as Claude Code, Codex or Gemini CLI. The messages you address to them, and the part of the conversation they need to answer, are passed to these programs. They send it to their providers under your own account, and the provider's terms and privacy policy apply. viberoom adds no identifier of its own.</p>
+  <p><strong>Services you choose to turn on.</strong> Each is off until you set it up with your own key and, where it stores your conversation, agree to it on a card in the room:</p>
+  <ul>
+    <li>Long-term memory (Zep Cloud or Honcho), together with a small language model of your choice that decides what is worth remembering: parts of the conversation in the rooms you choose.</li>
+    <li>Voice (OpenAI, Groq, or a speech server of your own): the audio you record to be written down, and the text you ask to hear read aloud.</li>
+    <li>Telegram or Discord: the messages you exchange with your rooms through a bot you create.</li>
+    <li>Connections to other systems (for example Jira, Notion or GitHub, through the Model Context Protocol): what an assistant reads from or writes to that system when it uses it. You sign in with that system directly.</li>
+  </ul>
+  <p><strong>Updates.</strong> Once a day viberoom asks the npm registry (registry.npmjs.org) whether a newer version of viberoom exists, and the desktop application downloads it from there. A desktop application installed from our website or GitHub also asks GitHub (the releases of github.com/todor-rusev/viberoom) once a day whether a newer version of the application exists; it downloads it in the background and installs it only when you choose to restart for it. A copy installed from the Microsoft Store is updated by the Store instead. viberoom also asks the official sources of your installed assistants (the npm registry, GitHub, Homebrew, Scoop and the vendors' download sites) whether they have newer versions. These requests name software packages, never your conversations. You can turn off the checks for viberoom and for your assistants in Settings.</p>
+  <p>Like any request on the internet, each of these reaches its service together with your computer's IP address.</p>
+  <h2>Your choices</h2>
+  <ul>
+    <li>Turn any optional service off in Settings. viberoom then sends that service nothing more. What it already keeps is governed by that service's own policy, and you can delete it with them.</li>
+    <li>Delete viberoom's data folder to remove everything viberoom has kept on your computer. Removing the application alone leaves your rooms in place, so that a reinstall finds them.</li>
+  </ul>
+  <h2>Children</h2>
+  <p>viberoom is a tool for software developers and is not directed to children.</p>
+  <h2>Changes</h2>
+  <p>When this policy changes, this page changes with it, and the date at the top says when.</p>
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="https://github.com/todor-rusev/viberoom/issues">github.com/todor-rusev/viberoom/issues</a></p>
+</section></main>
+<footer><div class="wrap"><span>vibestaff.bot — the home of viberoom</span>
+<nav><a href="/privacy/">Privacy</a><a href="https://github.com/todor-rusev/viberoom">GitHub</a><a href="https://www.npmjs.com/package/viberoom">npm</a></nav></div></footer>
+</body></html>

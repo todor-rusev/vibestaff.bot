@@ -13,7 +13,7 @@
  *
  * Usage: node scripts/check.mjs [site-dir]
  */
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
@@ -70,6 +70,7 @@ const REQUIRED = [
   "get/windows/index.html",
   "get/mac/index.html",
   "get/linux/index.html",
+  "privacy/index.html",
 ];
 // CNAME and robots.txt are short by nature and checked by their contents below; the pages are not
 const BY_CONTENT = new Set(["CNAME", "robots.txt"]);
@@ -203,6 +204,14 @@ for (const file of files.filter((f) => TEXT.test(f))) {
     fail(`${file}:${line}: ${what} — "${hit[0]}"`);
   }
 }
+
+// The privacy page is the product's policy drawn in the site's frame (scripts/render-privacy.mjs): where the policy is
+// at hand (the workspace, not the public repository the deploy runs in), the committed page must be what it draws
+const { POLICY, PAGE, renderPrivacy } = await import("./render-privacy.mjs");
+// line ends as a checkout makes them (CRLF where Git converts them) say nothing about the text
+const lf = (text) => text.replace(/\r\n/g, "\n");
+if (existsSync(POLICY) && resolve(PAGE) === resolve(join(SITE, "privacy", "index.html")) && lf(readFileSync(PAGE, "utf8")) !== lf(renderPrivacy(readFileSync(POLICY, "utf8"))))
+  fail("privacy/index.html is not what Projects/agent-chat/PRIVACY.md draws: npm run render:privacy");
 
 // --- the verdict ---------------------------------------------------------------------------------
 
