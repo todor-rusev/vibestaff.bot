@@ -43,8 +43,10 @@
     },
     linux: {
       label: "Linux",
-      what: "One AppImage: make it executable and run it. No package manager, no root.",
-      pick: (assets) => assets.filter((a) => /\.appimage$/i.test(a.name)),
+      // A .deb, not an AppImage: on Ubuntu 24.04 and later only the package's AppArmor profile lets Chromium's sandbox
+      // start, and an AppImage can carry none (shell/electron-builder.yml)
+      what: "Ubuntu and Debian, 64-bit. Installs as a package, with your password.",
+      pick: (assets) => assets.filter((a) => /linux/i.test(a.name) && /\.deb$/i.test(a.name)),
     },
   };
 
