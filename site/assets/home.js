@@ -1,5 +1,5 @@
 /*
- * mix.js — what the page cannot do with CSS alone.
+ * home.js — what the page cannot do with CSS alone.
  *
  *   opening   — the bot that draws itself, ended by any press, key or scroll, and gone under reduced motion;
  *   the room  — a short conversation in the chat on the stage: whoever speaks leans in and its voice shows,
@@ -62,7 +62,7 @@
     const li = document.createElement("li");
     li.className = `msg${step.who === "you" ? " me" : ""}`;
     if (who.tint) li.dataset.tint = who.tint;
-    li.innerHTML = `<span class="av"><img src="/dave-studio/demo/faces/${who.face}.webp" alt="" width="22" height="22"></span><div><b>${who.name}${who.role ? `<small>${who.role}</small>` : ""}</b><p>${step.text}</p></div>`;
+    li.innerHTML = `<span class="av"><img src="/assets/img/faces/${who.face}.webp" alt="" width="22" height="22"></span><div><b>${who.name}${who.role ? `<small>${who.role}</small>` : ""}</b><p>${step.text}</p></div>`;
     return li;
   }
 

@@ -90,10 +90,11 @@ if (has.has("index.html")) {
     ["the npm fallback", /npm install -g viberoom/],
     ["the resolver script", /assets\/download\.js/],
     // the download page with its opening (Todor, 10.10.2026: the spatial world that replaced it on 05.10 went back to a
-    // preview; the page people and the Store reach is this one)
-    ["the six feature cards", /data-tint="violet"[\s\S]*data-tint="orchid"/],
-    ["the world behind the page", /class="world"[\s\S]*class="floor"/],
-    ["the opening, alive", /assets\/alive\.js/],
+    // preview; the page people and the Store reach is this one). Since 11.10 in the studio's paper and pastels, on
+    // Todor's word: the old world behind the page is gone on purpose; the opening and the room of vibemates stay
+    ["the six feature cards", /class="panels"(?:[\s\S]*?class="panel(?:\s[^"]*)?"){6}/],
+    ["the room of vibemates around one chat", /id="stage"[\s\S]*class="room-card"/],
+    ["the opening, alive", /id="boot"[\s\S]*assets\/home\.js/],
     ["the way to the privacy policy", /href="\/privacy\/"/],
   ])
     if (!pattern.test(page)) fail(`index.html has lost ${what}`);

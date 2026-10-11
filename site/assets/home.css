@@ -1,5 +1,5 @@
 /*
- * mix.css — the page between the two: viberoom's opening and its room of vibemates, dressed in the paper, ink
+ * home.css — the page between the two: viberoom's opening and its room of vibemates, dressed in the paper, ink
  * and pastels of the studio version. Solid colour where the old page had glass and gradients; every motion is a
  * transform or an opacity, and all of it is off under prefers-reduced-motion.
  */
@@ -152,7 +152,7 @@ html:not(.js) .boot { display: none; }
 @keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
 
-/* the words settle in after the opening, in reading order (mix.js adds .ready) */
+/* the words settle in after the opening, in reading order (home.js adds .ready) */
 .js .sk { opacity: 0; transform: translateY(12px); transition: opacity 520ms ease, transform 520ms cubic-bezier(.2, .9, .3, 1); }
 .js .sk.ready { opacity: 1; transform: none; }
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 640ms ease, transform 640ms cubic-bezier(.2, .9, .3, 1); }
