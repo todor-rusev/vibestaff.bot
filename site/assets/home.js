@@ -46,7 +46,7 @@
     { who: "nova", text: "Good catch — handled. <i>@You</i>, ready when you are." },
   ];
   const PEOPLE = {
-    you: { name: "You", role: "", tint: "sky", face: "developer" },
+    you: { name: "You", role: "", tint: null, face: null },
     nova: { name: "Nova", role: "plans", tint: "lavender", face: "robot-blue" },
     kai: { name: "Kai", role: "builds", tint: "peach", face: "robot-orange" },
     rio: { name: "Rio", role: "reviews", tint: "butter", face: "robot-yellow" },
@@ -62,7 +62,7 @@
     const li = document.createElement("li");
     li.className = `msg${step.who === "you" ? " me" : ""}`;
     if (who.tint) li.dataset.tint = who.tint;
-    li.innerHTML = `<span class="av"><img src="/assets/img/faces/${who.face}.webp" alt="" width="22" height="22"></span><div><b>${who.name}${who.role ? `<small>${who.role}</small>` : ""}</b><p>${step.text}</p></div>`;
+    li.innerHTML = `${who.face ? `<span class="av"><img src="/assets/img/faces/${who.face}.webp" alt="" width="22" height="22"></span>` : ""}<div><b>${who.name}${who.role ? `<small>${who.role}</small>` : ""}</b><p>${step.text}</p></div>`;
     return li;
   }
 
