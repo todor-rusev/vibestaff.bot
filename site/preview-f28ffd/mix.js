@@ -2,9 +2,8 @@
  * mix.js — what the page cannot do with CSS alone.
  *
  *   opening   — the bot that draws itself, ended by any press, key or scroll, and gone under reduced motion;
- *   robots    — every vibemate is a copy of one drawing (#robot), put inline so each can move its own parts;
- *   the room  — a short conversation in the chat on the stage: whoever speaks works its mouth and lights its
- *               antenna, the others turn their eyes to it, and the line from it to the room runs;
+ *   the room  — a short conversation in the chat on the stage: whoever speaks leans in and its voice shows,
+ *               the others turn to it, and the line from it to the room runs;
  *   arrival   — sections lift in once, and each panel's picture plays when it arrives and on hover;
  *   the note  — the THEN/NOW slider of the band.
  *
@@ -14,15 +13,6 @@
   "use strict";
 
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // --- robots: one drawing, a copy inline in each place ----------------------------------------
-
-  const drawing = document.getElementById("robot");
-  for (const use of document.querySelectorAll('svg use[href="#robot"]')) {
-    const svg = use.ownerSVGElement;
-    for (const part of drawing.children) svg.appendChild(part.cloneNode(true));
-    use.remove();
-  }
 
   // --- the opening, and the words settling after it ---------------------------------------------
 
@@ -56,10 +46,10 @@
     { who: "nova", text: "Good catch — handled. <i>@You</i>, ready when you are." },
   ];
   const PEOPLE = {
-    you: { name: "You", role: "", tint: null, initial: "Y" },
-    nova: { name: "Nova", role: "plans", tint: "lavender", initial: "N" },
-    kai: { name: "Kai", role: "builds", tint: "mint", initial: "K" },
-    rio: { name: "Rio", role: "reviews", tint: "butter", initial: "R" },
+    you: { name: "You", role: "", tint: "sky", face: "developer" },
+    nova: { name: "Nova", role: "plans", tint: "lavender", face: "robot-blue" },
+    kai: { name: "Kai", role: "builds", tint: "peach", face: "robot-orange" },
+    rio: { name: "Rio", role: "reviews", tint: "butter", face: "robot-yellow" },
   };
   const stage = document.getElementById("stage");
   const list = document.getElementById("msgs");
@@ -72,34 +62,23 @@
     const li = document.createElement("li");
     li.className = `msg${step.who === "you" ? " me" : ""}`;
     if (who.tint) li.dataset.tint = who.tint;
-    li.innerHTML = `<span class="av">${who.initial}</span><div><b>${who.name}${who.role ? `<small>${who.role}</small>` : ""}</b><p>${step.text}</p></div>`;
+    li.innerHTML = `<span class="av"><img src="/dave-studio/demo/faces/${who.face}.webp" alt="" width="22" height="22"></span><div><b>${who.name}${who.role ? `<small>${who.role}</small>` : ""}</b><p>${step.text}</p></div>`;
     return li;
   }
 
-  // where each vibemate's eyes are, so the others can look at whoever speaks
+  // everyone turns a little toward whoever speaks; the speaker turns toward the room
   function lookAt(speaker) {
-    const target = mates[speaker]?.getBoundingClientRect();
+    const target = speaker && mates[speaker]?.getBoundingClientRect();
+    const room = stage.querySelector(".room-card").getBoundingClientRect();
     for (const [name, mate] of Object.entries(mates)) {
-      const eyes = mate.querySelector(".bot");
-      if (!eyes) continue;
-      let dx = 0, dy = 0;
-      if (target && name !== speaker) {
+      let turn = 0;
+      if (target) {
         const me = mate.getBoundingClientRect();
-        const x = target.left + target.width / 2 - (me.left + me.width / 2);
-        const y = target.top + target.height / 2 - (me.top + me.height / 2);
-        const d = Math.hypot(x, y) || 1;
-        dx = (x / d) * 3.2;
-        dy = (y / d) * 2.4;
-      } else if (target) {
-        // the speaker looks at the room in the middle
-        const room = stage.querySelector(".room-card").getBoundingClientRect();
-        const me = mate.getBoundingClientRect();
-        const x = room.left + room.width / 2 - (me.left + me.width / 2);
-        const d = Math.abs(x) || 1;
-        dx = (x / d) * 2.6;
+        const to = name === speaker ? room : target;
+        const x = to.left + to.width / 2 - (me.left + me.width / 2);
+        turn = Math.sign(x) * (name === speaker ? 4 : 8);
       }
-      eyes.style.setProperty("--lx", `${dx.toFixed(2)}px`);
-      eyes.style.setProperty("--ly", `${dy.toFixed(2)}px`);
+      mate.style.setProperty("--turn", `${turn}deg`);
     }
   }
 

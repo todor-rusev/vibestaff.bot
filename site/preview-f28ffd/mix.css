@@ -195,23 +195,21 @@ html:not(.js) .boot { display: none; }
 .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
 .dots i:nth-child(1) { background: #f6755a; } .dots i:nth-child(2) { background: #f2c94c; } .dots i:nth-child(3) { background: #6fcf97; }
 .msgs { -webkit-mask-image: linear-gradient(transparent, #000 22%); mask-image: linear-gradient(transparent, #000 22%); list-style: none; margin: 0; padding: 12px 12px 6px; display: flex; flex-direction: column; justify-content: flex-end; gap: 9px; flex: 1; overflow: hidden; }
-.msg { display: grid; grid-template-columns: 22px 1fr; gap: 7px; align-items: start; animation: msg-in 420ms cubic-bezier(.2, .9, .3, 1.2) both; }
+.msg { display: grid; grid-template-columns: 24px 1fr; gap: 7px; align-items: start; animation: msg-in 420ms cubic-bezier(.2, .9, .3, 1.2) both; }
 .msg.out { animation: msg-out 360ms ease forwards; }
-.msg .av { width: 22px; height: 22px; border-radius: 8px; display: grid; place-items: center; font-size: 11px; font-weight: 900; }
+.msg .av { width: 24px; height: 24px; border-radius: 8px; overflow: hidden; background: var(--tint, var(--paper-2)); }
+.msg .av img { width: 100%; height: 100%; object-fit: contain; }
 .msg b { display: block; font-size: 11px; font-weight: 900; }
 .msg b small { color: var(--muted); font-weight: 700; margin-left: 4px; }
 .msg p { margin: 2px 0 0; padding: 8px 11px; border-radius: 4px 12px 12px 12px; background: var(--paper-2); font-size: 13px; line-height: 1.4; color: var(--ink-2); }
 .msg p i { font-style: normal; font-weight: 900; color: var(--blue); }
 @media (prefers-color-scheme: dark) { .msg p i { color: var(--blue-soft); } }
-.msg.me { grid-template-columns: 1fr 22px; }
-.msg.me .av { order: 2; background: var(--coral); color: var(--coral-ink); }
+.msg.me { grid-template-columns: 1fr 24px; }
+.msg.me .av { order: 2; }
 .msg.me p { background: var(--ink); color: var(--paper); border-radius: 12px 4px 12px 12px; }
 .msg.me p i { color: #ffd2c6; }
 @media (prefers-color-scheme: dark) { .msg.me p i { color: #b3412a; } }
 .msg.me b { text-align: right; }
-.msg[data-tint="lavender"] .av { background: var(--lavender); color: var(--lavender-ink); }
-.msg[data-tint="mint"] .av { background: var(--mint); color: var(--mint-ink); }
-.msg[data-tint="butter"] .av { background: var(--butter); color: var(--butter-ink); }
 @keyframes msg-in { from { opacity: 0; transform: translateY(10px) scale(0.96); } to { opacity: 1; transform: none; } }
 @keyframes msg-out { to { opacity: 0; transform: translateY(-8px); } }
 .room-input { display: flex; justify-content: space-between; align-items: center; margin: 6px 10px 10px; padding: 9px 12px; border-radius: 12px; background: var(--paper-2); color: var(--muted); font-size: 11.5px; }
@@ -233,60 +231,35 @@ html:not(.js) .boot { display: none; }
 .mate.typing-now .typing { opacity: 1; transform: none; }
 @keyframes dot { 40% { transform: translateY(-4px); opacity: 1; } 0%, 80%, 100% { opacity: 0.45; } }
 
-/* the robot, part by part: what moves is a group of its own, and every motion is a transform */
-.bot { width: 100%; height: auto; overflow: visible; }
-:is(.bot, #robot) .head { fill: var(--tint, var(--card)); stroke: var(--ink); stroke-width: 3; }
-:is(.bot, #robot) .ear { fill: var(--tint-ink, var(--ink)); }
-:is(.bot, #robot) .visor { fill: #202544; }
-:is(.bot, #robot) .eye { fill: #fdfbf6; }
-:is(.bot, #robot) .mouth { fill: #f6755a; }
-:is(.bot, #robot) .stalk { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
-:is(.bot, #robot) .knob { fill: var(--tint-ink, var(--coral)); }
-:is(.bot, #robot) .body { fill: var(--tint, var(--card)); stroke: var(--ink); stroke-width: 3; }
-:is(.bot, #robot) .chest { fill: var(--tint-ink, var(--ink)); }
-:is(.bot, #robot) .arm { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
-.bot :is(.rig, .antenna, .eyes, .eye, .mouth, .arm, .chest) { transform-box: fill-box; }
-.bot .rig { transform-origin: 50% 100%; animation: breathe 3.6s ease-in-out infinite; }
-.bot .antenna { transform-origin: 50% 100%; animation: sway 4.2s ease-in-out infinite; }
-.bot .eyes { transform: translate(var(--lx, 0px), var(--ly, 0px)); transition: transform 320ms cubic-bezier(.2, .9, .3, 1.2); }
-.bot .eye { transform-origin: center; animation: blink 4.8s var(--blink, 0s) infinite; }
-.bot .mouth { transform-origin: center; }
-.bot .arm-l { transform-origin: 0% 0%; }
-.bot .arm-r { transform-origin: 0% 0%; }
-.mate[data-mate="kai"] { --blink: 1.3s; }
-.mate[data-mate="rio"] { --blink: 2.6s; }
-.mate[data-mate="kai"] .rig { animation-delay: -1.2s; }
-.mate[data-mate="rio"] .rig { animation-delay: -2.1s; }
+/* the vibemates: the product's own faces, each in a frame of its colour; a picture has no parts to move, so
+   the whole of it moves: it floats, it turns toward whoever speaks, and the speaker leans in with its voice showing */
+.face { position: relative; display: block; width: 86%; aspect-ratio: 1; border-radius: 32%; background: var(--tint, var(--card)); box-shadow: 0 0 0 4px var(--card), var(--shadow-lift); transform: rotate(var(--turn, 0deg)); transition: transform 420ms cubic-bezier(.2, .9, .3, 1.2), box-shadow 300ms ease; animation: float 4.4s ease-in-out infinite; }
+.face img { width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
+.mate[data-mate="kai"] .face { animation-delay: -1.4s; }
+.mate[data-mate="rio"] .face { animation-delay: -2.6s; }
+.mate[data-mate="you"] .face { animation-delay: -3.3s; }
+.mate.talking .face { transform: rotate(var(--turn, 0deg)) scale(1.08); box-shadow: 0 0 0 4px var(--card), 0 0 0 9px color-mix(in srgb, var(--tint-ink) 30%, transparent), var(--shadow-lift); animation: float 4.4s ease-in-out infinite, speak 1.1s ease-in-out infinite; }
+.mate.happy .face { animation: hop 520ms cubic-bezier(.3, 1.6, .5, 1) 2; }
+/* the voice: three bars beside the speaker */
+.voice { position: absolute; top: 34%; right: -10%; display: flex; align-items: center; gap: 3px; height: 22px; opacity: 0; transition: opacity 200ms ease; }
+.voice i { width: 4px; height: 30%; border-radius: 4px; background: var(--tint-ink, var(--coral)); }
+.mate.talking .voice { opacity: 1; }
+.mate.talking .voice i { animation: bar 520ms ease-in-out infinite alternate; }
+.mate.talking .voice i:nth-child(2) { animation-delay: 160ms; }
+.mate.talking .voice i:nth-child(3) { animation-delay: 320ms; }
+.mate[data-mate="nova"] .voice, .mate[data-mate="rio"] .voice { right: -14%; }
+.mate[data-mate="kai"] .voice, .mate[data-mate="you"] .voice { right: auto; left: -14%; flex-direction: row-reverse; }
 [data-tint="lavender"] { --tint: var(--lavender); --tint-ink: var(--lavender-ink); }
 [data-tint="mint"] { --tint: var(--mint); --tint-ink: var(--mint-ink); }
 [data-tint="butter"] { --tint: var(--butter); --tint-ink: var(--butter-ink); }
 [data-tint="peach"] { --tint: var(--peach); --tint-ink: var(--peach-ink); }
 [data-tint="sky"] { --tint: var(--sky); --tint-ink: var(--sky-ink); }
 [data-tint="orchid"] { --tint: var(--orchid); --tint-ink: var(--orchid-ink); }
-@keyframes breathe { 50% { transform: translateY(-2.5%) scale(1.01); } }
-@keyframes sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(6deg); } }
-
-/* speaking: the mouth works, the antenna lights, the whole bot leans in and an arm gestures */
-.mate.talking .mouth { animation: talk 190ms ease-in-out infinite alternate; }
-.mate.talking .knob { fill: var(--coral); filter: drop-shadow(0 0 5px #f6755a); }
-.mate.talking .rig { animation: talk-bob 520ms ease-in-out infinite; }
-.mate.talking .arm-r { animation: gesture 760ms ease-in-out infinite; }
-.mate.happy .arm-l { animation: wave-l 520ms ease-in-out 3; }
-.mate.happy .arm-r { animation: wave-r 520ms ease-in-out 3; }
-.mate.happy .rig { animation: hop 520ms cubic-bezier(.3, 1.6, .5, 1) 2; }
-@keyframes talk { from { transform: scaleY(1) scaleX(1); } to { transform: scaleY(2.8) scaleX(0.8); } }
-@keyframes talk-bob { 50% { transform: translateY(-3%) rotate(-2deg); } }
-@keyframes gesture { 50% { transform: rotate(-38deg); } }
+@keyframes float { 50% { translate: 0 -5px; } }
+@keyframes speak { 50% { translate: 0 -3px; } }
+@keyframes hop { 40% { translate: 0 -12px; } }
+@keyframes bar { from { height: 25%; } to { height: 100%; } }
 @keyframes wave-r { 50% { transform: rotate(-70deg); } }
-@keyframes wave-l { 50% { transform: rotate(70deg); } }
-@keyframes hop { 40% { transform: translateY(-9%); } }
-
-/* you: a face, not a robot */
-.you-face { position: relative; width: 74%; aspect-ratio: 1; border-radius: 34%; background: var(--peach); box-shadow: inset 0 0 0 3px var(--ink); }
-.you-face i { position: absolute; top: 38%; width: 10%; height: 10%; border-radius: 50%; background: var(--ink); animation: blink 5.4s 0.7s infinite; }
-.you-face i:first-child { left: 30%; } .you-face i:nth-child(2) { right: 30%; }
-.you-face b { position: absolute; left: 32%; right: 32%; top: 58%; height: 14%; border: 3px solid var(--ink); border-top: 0; border-radius: 0 0 40px 40px; }
-.mate.you.talking .you-face { animation: talk-bob 520ms ease-in-out infinite; }
 
 /* ---- the real thing ------------------------------------------------------------------------- */
 
@@ -324,9 +297,10 @@ html:not(.js) .boot { display: none; }
 .panel h3 { font-size: 30px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 14px; }
 .panel p:last-child { margin: 0; color: var(--ink-2); max-width: 26em; }
 .panel .art { position: absolute; right: 22px; top: 22px; width: 78px; height: 78px; overflow: visible; }
-.panel .panel-bot { position: absolute; right: 24px; top: 16px; width: 66px; height: 80px; }
+.panel .panel-face { position: absolute; right: 22px; top: 20px; width: 78px; height: 78px; border-radius: 30%; background: var(--card); box-shadow: var(--shadow); transform-origin: 50% 90%; }
+.panel .panel-face img { width: 100%; height: 100%; object-fit: contain; }
 .art { fill: none; stroke: var(--tint-ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-.art .cover, .art .sheet, .art .face, .art .shield, .art .phone, .art .lock, .art .bubble rect { fill: var(--card); }
+.art .cover, .art .sheet, .art .dial, .art .shield, .art .phone, .art .lock, .art .bubble rect { fill: var(--card); }
 .art .page { fill: var(--card); transform-box: fill-box; transform-origin: 0% 50%; }
 .art .tick { stroke-dasharray: 16; stroke-dashoffset: 0; }
 .art .hand { transform-box: view-box; transform-origin: 32px 34px; }
@@ -343,10 +317,8 @@ html:not(.js) .boot { display: none; }
 .panel.in.play[data-art="clock"] .bell { animation: ring 160ms ease-in-out 6; transform-box: fill-box; transform-origin: center; }
 .panel.in.play[data-art="shield"] .shackle { animation: lock 1.1s cubic-bezier(.3, 1.4, .5, 1); }
 .panel.in.play[data-art="phone"] .bubble { animation: pop 900ms cubic-bezier(.2, .9, .3, 1.6); }
-.panel.in.play[data-art="bot"] .arm-r { animation: wave-r 520ms ease-in-out 3; }
-.panel.in.play[data-art="bot"] .arm-l { animation: wave-l 520ms ease-in-out 3; }
-.panel.in.play[data-art="bot"] .eyes { animation: look-around 1.6s ease-in-out; }
-@keyframes look-around { 30% { transform: translateX(-3px); } 65% { transform: translateX(3px); } }
+.panel.in.play[data-art="bot"] .panel-face { animation: greet 1.4s ease-in-out; }
+@keyframes greet { 15%, 45% { transform: rotate(-10deg); } 30%, 60% { transform: rotate(10deg); } 80% { transform: rotate(0) translateY(-4px); } }
 @keyframes flip { 0% { transform: scaleX(1); } 50% { transform: scaleX(-1); } 100% { transform: scaleX(1); } }
 @keyframes tick { from { stroke-dashoffset: 16; } to { stroke-dashoffset: 0; } }
 @keyframes spin { from { transform: rotate(-360deg); } }
@@ -479,8 +451,7 @@ footer nav a:hover { color: var(--ink); }
   .beams { display: none; }
   .room-card { position: static; grid-column: 1 / -1; width: auto; height: 340px; }
   .mate, .mate[data-mate] { position: relative; left: auto; top: auto; width: auto; }
-  .mate .bot { width: 72%; }
-  .you-face { width: 54%; }
+  .face { width: 78%; }
   .mate .tape { font-size: 11px; padding: 4px 7px; }
   .typing { right: 0; }
   .door { padding: 36px 26px 32px; }
@@ -494,4 +465,3 @@ footer nav a:hover { color: var(--ink); }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .js .sk, .js .reveal { opacity: 1; transform: none; }
 }
-.panel .panel-bot { --tint: var(--card); }

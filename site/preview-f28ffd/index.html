@@ -37,28 +37,6 @@
   <p class="boot-word"><span class="boot-who">vibestaff presents</span><span class="boot-what">viberoom</span></p>
 </div>
 
-<!-- One robot, drawn once: every vibemate on the page is a <use> of it, so a change of shape is one change. The
-     parts that move are separate groups, and the motion itself lives in the stylesheet. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="robot" viewBox="0 0 80 96">
-      <g class="rig">
-        <g class="antenna"><path class="stalk" d="M40 22V11"/><circle class="knob" cx="40" cy="8" r="4.6"/></g>
-        <rect class="ear" x="8" y="35" width="8" height="14" rx="4"/>
-        <rect class="ear" x="64" y="35" width="8" height="14" rx="4"/>
-        <rect class="head" x="14" y="21" width="52" height="42" rx="15"/>
-        <rect class="visor" x="21" y="28" width="38" height="27" rx="10"/>
-        <g class="eyes"><circle class="eye" cx="32" cy="40" r="4.4"/><circle class="eye" cx="48" cy="40" r="4.4"/></g>
-        <rect class="mouth" x="34" y="48" width="12" height="2.8" rx="1.4"/>
-        <path class="arm arm-l" d="M25 71 L13 82"/>
-        <path class="arm arm-r" d="M55 71 L67 82"/>
-        <rect class="body" x="24" y="65" width="32" height="24" rx="10"/>
-        <circle class="chest" cx="40" cy="76" r="3.4"/>
-      </g>
-    </symbol>
-  </defs>
-</svg>
-
 <header class="bar">
   <a class="brand" href="/"><img src="/dave-studio/assets/icon.png" alt="" width="34" height="34">viberoom<span>by vibestaff</span></a>
   <nav>
@@ -110,22 +88,26 @@
     </div>
 
     <figure class="mate" data-mate="nova" data-tint="lavender">
-      <svg class="bot" viewBox="0 0 80 96"><use href="#robot"/></svg>
+      <span class="face"><img src="/dave-studio/demo/faces/robot-blue.webp" alt="" width="120" height="120"></span>
+      <span class="voice" aria-hidden="true"><i></i><i></i><i></i></span>
       <figcaption class="tape">Nova <small>plans</small></figcaption>
       <span class="typing"><i></i><i></i><i></i></span>
     </figure>
-    <figure class="mate" data-mate="kai" data-tint="mint">
-      <svg class="bot" viewBox="0 0 80 96"><use href="#robot"/></svg>
+    <figure class="mate" data-mate="kai" data-tint="peach">
+      <span class="face"><img src="/dave-studio/demo/faces/robot-orange.webp" alt="" width="120" height="120"></span>
+      <span class="voice" aria-hidden="true"><i></i><i></i><i></i></span>
       <figcaption class="tape">Kai <small>builds</small></figcaption>
       <span class="typing"><i></i><i></i><i></i></span>
     </figure>
     <figure class="mate" data-mate="rio" data-tint="butter">
-      <svg class="bot" viewBox="0 0 80 96"><use href="#robot"/></svg>
+      <span class="face"><img src="/dave-studio/demo/faces/robot-yellow.webp" alt="" width="120" height="120"></span>
+      <span class="voice" aria-hidden="true"><i></i><i></i><i></i></span>
       <figcaption class="tape">Rio <small>reviews</small></figcaption>
       <span class="typing"><i></i><i></i><i></i></span>
     </figure>
-    <figure class="mate you" data-mate="you">
-      <span class="you-face" aria-hidden="true"><i></i><i></i><b></b></span>
+    <figure class="mate you" data-mate="you" data-tint="sky">
+      <span class="face"><img src="/dave-studio/demo/faces/developer.webp" alt="" width="120" height="120"></span>
+      <span class="voice" aria-hidden="true"><i></i><i></i><i></i></span>
       <figcaption class="tape">You</figcaption>
     </figure>
   </div>
@@ -174,7 +156,7 @@
       <p>Ask about a decision from a year ago and a vibemate reads it back — with the message number, so you can check it.</p>
     </article>
     <article class="panel reveal" data-tint="mint" data-art="bot">
-      <svg class="bot panel-bot" viewBox="0 0 80 96" aria-hidden="true"><use href="#robot"/></svg>
+      <span class="panel-face" aria-hidden="true"><img src="/dave-studio/demo/faces/robot-waving.webp" alt="" width="80" height="80"></span>
       <p class="num">02</p><h3>The bots you<br>already have.</h3>
       <p>Claude, Codex, Gemini, Cursor, OpenCode, Copilot, Grok, Hermes. Your installations, your logins, no key from us.</p>
     </article>
@@ -184,7 +166,7 @@
       <p>When to disagree, what to check first, what never to do — in plain words, carried into every turn.</p>
     </article>
     <article class="panel reveal" data-tint="peach" data-art="clock">
-      <svg class="art" viewBox="0 0 64 64" aria-hidden="true"><circle class="face" cx="32" cy="34" r="22"/><path class="bell" d="M14 14l7-5M50 14l-7-5"/><path class="hand hour" d="M32 34V22"/><path class="hand minute" d="M32 34h12"/><circle class="pin" cx="32" cy="34" r="2.6"/></svg>
+      <svg class="art" viewBox="0 0 64 64" aria-hidden="true"><circle class="dial" cx="32" cy="34" r="22"/><path class="bell" d="M14 14l7-5M50 14l-7-5"/><path class="hand hour" d="M32 34V22"/><path class="hand minute" d="M32 34h12"/><circle class="pin" cx="32" cy="34" r="2.6"/></svg>
       <p class="num">04</p><h3>Work on<br>a schedule.</h3>
       <p>A reminder at five, a task every morning, a job when viberoom starts. The room keeps its appointments.</p>
     </article>
