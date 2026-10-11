@@ -69,7 +69,7 @@ for (const needed of REQUIRED) {
     fail(`suspiciously empty: ${needed}`);
 }
 
-const DOMAIN = "vibestaff.bot";
+const DOMAIN = "viberoom.chat";
 if (has.has("CNAME")) {
   const cname = readFileSync(join(SITE, "CNAME"), "utf8").trim();
   if (cname !== DOMAIN)

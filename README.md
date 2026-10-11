@@ -1,4 +1,4 @@
-# vibestaff.bot
+# viberoom.chat
 
 A spatial introduction to [viberoom](https://github.com/todor-rusev/viberoom). The whole site is a
 navigable world: six feature destinations, a collaboration investigation, and downloads. The room
@@ -121,7 +121,13 @@ git config.
 
 ## The domain
 
-`vibestaff.bot` is registered at Porkbun. GitHub Pages needs, at the registrar:
+The site lives at `viberoom.chat` (from 11.10.2026; the repository keeps its old name). Both `viberoom.chat` and
+the earlier `vibestaff.bot` are registered at Porkbun. `vibestaff.bot` is not served by Pages any more: Porkbun's
+URL forwarding sends it to `https://viberoom.chat` with a 301 and the requested path, so the addresses already out
+in the world (the Store listing's privacy page, the 1.0.0 application's homepage, the READMEs) still arrive. The
+custom domain itself is set in the repository's Settings → Pages, since the deploy runs as an Actions workflow.
+
+For `viberoom.chat`, GitHub Pages needs, at the registrar:
 
 | type | host | answer |
 | --- | --- | --- |

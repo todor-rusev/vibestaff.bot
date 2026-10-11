@@ -60,7 +60,7 @@ export function renderPrivacy(markdown) {
   <h1>${inline(title)}</h1>
 ${body.join("\n")}
 </section></main>
-<footer><div class="wrap"><span>vibestaff.bot — the home of viberoom</span>
+<footer><div class="wrap"><span>viberoom.chat — the home of viberoom</span>
 <nav><a href="/privacy/">Privacy</a><a href="https://github.com/todor-rusev/viberoom">GitHub</a><a href="https://www.npmjs.com/package/viberoom">npm</a></nav></div></footer>
 </body></html>
 `;
