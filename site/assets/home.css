@@ -73,6 +73,8 @@
   }
 }
 
+/* the page as a whole at 90%, where it reads best; phones keep their own size */
+@media (min-width: 760px) { html { zoom: 0.9; } }
 * { box-sizing: border-box; }
 body { margin: 0; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }
@@ -99,7 +101,7 @@ main > section { max-width: 1240px; margin: 0 auto; padding: 64px 32px; }
 .label.on-band { border-color: #ffffff3d; color: inherit; opacity: 0.8; }
 
 /* a strip of paper stuck on: the labels, the vendors, the names under the bots */
-.tape { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px 7px 11px; background: var(--card); color: var(--ink); border-radius: 10px; font-size: 14px; font-weight: 800; box-shadow: 0 1px 0 #20254412, 0 6px 14px -8px #20254466; transform: rotate(var(--tilt, -1.2deg)); transition: transform 320ms cubic-bezier(.2, .9, .3, 1.2); }
+.tape { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px 7px 11px; background: var(--card); color: var(--ink); border-radius: 10px; font-size: 14px; font-weight: 800; box-shadow: 0 1px 0 #20254412, 0 6px 14px -8px #20254466; transform: rotate(var(--tilt, -1.2deg)); transition: transform 280ms cubic-bezier(.34, 1.8, .5, 1); }
 .tape img { width: 16px; height: 16px; }
 .tape small { color: var(--muted); font-weight: 700; }
 
@@ -174,13 +176,14 @@ html:not(.js) .boot { display: none; }
 .live-dot { flex: none; margin-top: 3px; width: 9px; height: 9px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 0 #f6755a80; animation: live 2.2s infinite; }
 @keyframes live { 70% { box-shadow: 0 0 0 10px #f6755a00; } 100% { box-shadow: 0 0 0 0 #f6755a00; } }
 .hero .lede { margin: 24px 0 30px; }
+.hero .lede strong { color: var(--ink); font-weight: 900; }
 .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 28px; }
 .vendors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
 .vendors .tape:nth-child(2n) { --tilt: 1.4deg; }
 .vendors .tape:nth-child(3n) { --tilt: -0.4deg; }
 .vendors .more { background: transparent; box-shadow: inset 0 0 0 1.5px var(--line); color: var(--muted); }
-/* a pointer on the strip straightens it: every label stands level in its line, and leans again when the pointer leaves */
-.vendors:hover .tape { transform: none; }
+/* each label straightens on its own under the pointer, with a quick spring, and springs back to its lean when the pointer leaves */
+.vendors .tape:hover { transform: rotate(0deg) translateY(-2px); }
 
 /* the stage: one chat in the middle, the vibemates and you around it */
 .stage { position: relative; aspect-ratio: 600 / 560; width: 100%; }
@@ -228,9 +231,8 @@ html:not(.js) .boot { display: none; }
 .mate[data-mate="rio"] .tape { --tilt: -2deg; }
 /* you: a label, not a face; nobody has to look like a picture to be in the room */
 .mate[data-mate="you"] { align-content: center; }
-.mate .you-tag { --tilt: 2deg; padding: 14px 24px; border-radius: 16px; background: var(--coral); color: var(--coral-ink); font-size: 22px; font-weight: 900; letter-spacing: -0.01em; box-shadow: 0 2px 0 #20254412, 0 14px 28px -14px #3a1d1799; }
+.mate .you-tag { --tilt: 2deg; position: relative; padding: 14px 24px; border-radius: 16px; background: var(--coral); color: var(--coral-ink); font-size: 22px; font-weight: 900; letter-spacing: -0.01em; box-shadow: 0 2px 0 #20254412, 0 14px 28px -14px #3a1d1799; }
 .mate.you.talking .you-tag { transform: rotate(0deg) scale(1.08); }
-.mate.you .voice { top: 50%; translate: 0 -50%; }
 .typing { position: absolute; top: -4%; right: -6%; display: inline-flex; gap: 3px; padding: 6px 8px; border-radius: 10px 10px 10px 2px; background: var(--card); box-shadow: var(--shadow); opacity: 0; transform: scale(0.6); transition: opacity 180ms ease, transform 220ms cubic-bezier(.2, .9, .3, 1.6); }
 .typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: dot 900ms infinite; }
 .typing i:nth-child(2) { animation-delay: 150ms; } .typing i:nth-child(3) { animation-delay: 300ms; }
@@ -243,7 +245,6 @@ html:not(.js) .boot { display: none; }
 .face img { width: 100%; height: 100%; object-fit: contain; border-radius: inherit; }
 .mate[data-mate="kai"] .face { animation-delay: -1.4s; }
 .mate[data-mate="rio"] .face { animation-delay: -2.6s; }
-.mate[data-mate="you"] .face { animation-delay: -3.3s; }
 .mate.talking .face { transform: rotate(var(--turn, 0deg)) scale(1.08); box-shadow: 0 0 0 4px var(--card), 0 0 0 9px color-mix(in srgb, var(--tint-ink) 30%, transparent), var(--shadow-lift); animation: float 4.4s ease-in-out infinite, speak 1.1s ease-in-out infinite; }
 .mate.happy .face { animation: hop 520ms cubic-bezier(.3, 1.6, .5, 1) 2; }
 /* the voice: three bars beside the speaker */
@@ -254,7 +255,9 @@ html:not(.js) .boot { display: none; }
 .mate.talking .voice i:nth-child(2) { animation-delay: 160ms; }
 .mate.talking .voice i:nth-child(3) { animation-delay: 320ms; }
 .mate[data-mate="nova"] .voice, .mate[data-mate="rio"] .voice { right: -14%; }
-.mate[data-mate="kai"] .voice, .mate[data-mate="you"] .voice { right: auto; left: -14%; flex-direction: row-reverse; }
+.mate[data-mate="kai"] .voice { right: auto; left: -14%; flex-direction: row-reverse; }
+/* yours is in your label, just outside its left edge: bars of the label's own coral would vanish on it */
+.mate[data-mate="you"] .voice { top: 50%; right: calc(100% + 8px); translate: 0 -50%; flex-direction: row-reverse; }
 [data-tint="lavender"] { --tint: var(--lavender); --tint-ink: var(--lavender-ink); }
 [data-tint="mint"] { --tint: var(--mint); --tint-ink: var(--mint-ink); }
 [data-tint="butter"] { --tint: var(--butter); --tint-ink: var(--butter-ink); }
