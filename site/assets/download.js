@@ -15,6 +15,9 @@
  *
  * Windows has a second channel: the Microsoft Store signs the package itself, so when STORE_URL is
  * filled in that becomes the first button and the installer stays beside it as the direct download.
+ * The direct installer has no code-signing certificate yet, so Windows stops it once with a blue
+ * "Windows protected your PC" screen. Before that download a vibemate says so and how to go on, and
+ * points at the Store's copy, which has no such screen (exeNote).
  */
 (() => {
   "use strict";
@@ -25,6 +28,8 @@
   /** The Microsoft Store listing, once it exists ("https://apps.microsoft.com/detail/<id>"). Empty: the installer is the only Windows way. */
   const STORE_URL = "";
   const NPM = "npm install -g viberoom";
+  /** The vibemate who says the word before Windows' direct installer: one of the faces viberoom itself carries. */
+  const NOTE_FACE = "/assets/img/vibemate.webp";
 
   /**
    * What each system's file looks like. `pick` gets the release's assets and returns the ones for that
@@ -102,6 +107,57 @@
     });
   }
 
+  // --- the word before Windows' direct installer ------------------------------------------------
+
+  let note = null;
+
+  /**
+   * Opens the note for `file` (one of offer()'s downloads); false where the browser has no dialog, and then the link
+   * simply downloads, as it did before the note.
+   */
+  function exeNote(file) {
+    if (typeof HTMLDialogElement !== "function") return false;
+    if (!note) {
+      note = document.createElement("dialog");
+      note.className = "exe-note";
+      note.setAttribute("aria-labelledby", "exe-note-title");
+      // the Store's copy is the same viberoom, signed by Microsoft; where its address is known the note says so and links it
+      const store = STORE_URL ? `<p>If you would rather skip those questions, get it from the Microsoft Store instead: the same viberoom, signed by Microsoft, so nothing asks.</p>` : "";
+      note.innerHTML = `
+        <button class="exe-note-x" type="button" data-role="note-close" aria-label="Close">&times;</button>
+        <div class="exe-note-head">
+          <img src="${NOTE_FACE}" alt="" width="64" height="64">
+          <div><p class="exe-note-who">A quick word from a vibemate</p><h3 id="exe-note-title">This installer isn't signed yet</h3></div>
+        </div>
+        <p>It works just the same, it simply has no Windows certificate yet. So your browser may first ask whether to keep
+        the file: choose <b>Keep</b>. Then, the first time it runs, Windows shows a blue screen: <b>Windows protected your
+        PC</b>. Choose <b>More info</b>, then <b>Run anyway</b>, and setup carries on as usual.</p>
+        ${store}
+        <div class="exe-note-actions">
+          <a class="btn primary sm" data-role="note-download" download href="#" autofocus>Download the installer</a>
+          ${STORE_URL ? `<a class="btn ghost sm" href="${STORE_URL}">Microsoft Store</a>` : ""}
+        </div>`;
+      document.body.appendChild(note);
+      note.querySelector('[data-role="note-close"]').addEventListener("click", () => note.close());
+      // the download goes on in the browser; the note has said its word
+      note.querySelector('[data-role="note-download"]').addEventListener("click", () => note.close());
+      // a click on the dimmed page around it closes it, as Escape does
+      note.addEventListener("click", (event) => { if (event.target === note) note.close(); });
+    }
+    const go = note.querySelector('[data-role="note-download"]');
+    go.href = file.url;
+    go.textContent = `Download the installer · ${size(file.bytes)}`;
+    note.showModal();
+    return true;
+  }
+
+  /** Every direct-installer link of a Windows card opens the note first. */
+  function wireExeNote(card, file) {
+    for (const link of card.querySelectorAll("[data-exe-note]")) {
+      link.addEventListener("click", (event) => { if (exeNote(file)) event.preventDefault(); });
+    }
+  }
+
   // --- the cards on the page -------------------------------------------------------------------
 
   function paintCard(card, system, state, release) {
@@ -134,15 +190,18 @@
 
     const first = downloads[0];
     if (store) {
+      // the Store first and largest; the direct installer beneath it, smaller, after an "or"
       button.href = STORE_URL;
-      button.textContent = "Get it from the Microsoft Store";
-      aside.innerHTML = `Signed and updated by the Store. <a href="${first.url}">Direct installer</a> · ${size(first.bytes)}`;
+      button.textContent = "Download from the Microsoft Store";
+      aside.innerHTML = `or <a href="${first.url}" data-exe-note>download the installer directly</a> · ${size(first.bytes)}`;
     } else {
       button.href = first.url;
       button.textContent = downloads.length > 1 && first.label ? `Download · ${first.label}` : `Download for ${spec.label}`;
       button.setAttribute("download", "");
+      if (system === "windows") button.dataset.exeNote = "";
       aside.innerHTML = `${size(first.bytes)}${release.tag ? ` · ${release.tag}` : ""}`;
     }
+    if (system === "windows") wireExeNote(card, first);
 
     // A second architecture is a choice the visitor makes, never one this page makes for them.
     for (const extra of downloads.slice(1)) {
@@ -205,6 +264,16 @@
         return;
       }
       const first = downloads[0];
+      if (system === "windows") {
+        // no download by itself here: the word about Windows' blue screen comes first, as on the main page. Reached only
+        // without STORE_URL: with it the Store opens above
+        tell("This installer isn't signed with a Windows certificate yet. It works just the same; your browser may first ask whether to keep the file: choose Keep. "
+          + "The first time it runs, Windows shows a blue screen: Windows protected your PC. Choose More info, then Run anyway, and setup carries on as usual.");
+        link.href = first.url;
+        link.setAttribute("download", "");
+        link.textContent = `Download the installer · ${size(first.bytes)}`;
+        return;
+      }
       tell(`Downloading ${first.name} · ${size(first.bytes)}. If nothing happens, use the link below.`);
       link.href = first.url;
       link.textContent = `Download ${first.name}`;
