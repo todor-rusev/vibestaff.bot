@@ -157,8 +157,10 @@ section { padding: 72px 0; }
 .dl .aside { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
 .dl .aside a { font-weight: 800; }
 
-/* the word a vibemate says before Windows' direct installer (download.js, exeNote) */
-.exe-note { position: relative; width: min(460px, calc(100% - 32px)); border: 0; border-radius: 22px; padding: 24px; background: var(--card); color: var(--ink); box-shadow: var(--shadow-lift); }
+/* the word a vibemate says before Windows' direct installer (download.js, exeNote). No position of its own: an open
+   modal <dialog> is fixed in the middle of the screen, which also anchors the close button; a relative one sat at the
+   top of the page, and the focus scrolled the page up to it */
+.exe-note { width: min(460px, calc(100% - 32px)); border: 0; border-radius: 22px; padding: 24px; background: var(--card); color: var(--ink); box-shadow: var(--shadow-lift); }
 .exe-note-x { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font-size: 24px; line-height: 1; cursor: pointer; }
 .exe-note-x:hover, .exe-note-x:focus-visible { background: var(--soft); color: var(--ink); }
 .exe-note::backdrop { background: rgba(20, 18, 50, 0.45); backdrop-filter: blur(2px); }
