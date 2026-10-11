@@ -49,19 +49,33 @@ export function renderPrivacy(markdown) {
 <meta name="description" content="What viberoom keeps, where it keeps it, and what leaves your computer.">
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/site.css">
+<meta name="theme-color" content="#f5f1e9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16182e" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/home.css">
 </head>
 <body>
-<header class="bar"><div class="wrap">
-  <a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="30" height="30">viberoom</a>
-  <nav><a class="btn primary sm" href="/#download">Download</a></nav>
-</div></header>
-<main><section class="wrap" style="padding:80px 0;max-width:760px">
+<header class="bar">
+  <a class="brand" href="/"><img src="/assets/img/app-icon.png" alt="" width="34" height="34">viberoom<span>by vibestaff</span></a>
+  <nav><a class="pill ink sm" href="/#download">Get viberoom <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main>
+<section class="page prose">
+  <p class="label">PRIVACY</p>
   <h1>${inline(title)}</h1>
 ${body.join("\n")}
-</section></main>
-<footer><div class="wrap"><span>viberoom.chat — the home of viberoom</span>
-<nav><a href="/privacy/">Privacy</a><a href="https://github.com/todor-rusev/viberoom">GitHub</a><a href="https://www.npmjs.com/package/viberoom">npm</a></nav></div></footer>
+</section>
+</main>
+<footer>
+  <a class="brand" href="/"><img src="/assets/img/app-icon.png" alt="" width="26" height="26">viberoom</a>
+  <span>viberoom.chat — the home of viberoom</span>
+  <nav>
+    <a href="/#download">Download</a>
+    <a href="https://github.com/todor-rusev/viberoom">GitHub</a>
+    <a href="https://www.npmjs.com/package/viberoom">npm</a>
+    <a href="/privacy/">Privacy</a>
+  </nav>
+</footer>
 </body></html>
 `;
 }
