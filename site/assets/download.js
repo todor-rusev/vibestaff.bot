@@ -25,8 +25,8 @@
   const REPO = "todor-rusev/viberoom";
   const RELEASES = `https://github.com/${REPO}/releases`;
   const API = `https://api.github.com/repos/${REPO}/releases/latest`;
-  /** The Microsoft Store listing, once it exists ("https://apps.microsoft.com/detail/<id>"). Empty: the installer is the only Windows way. */
-  const STORE_URL = "";
+  /** The Microsoft Store listing (viberoom, 9N1GG0G88CSJ). Empty: the installer is the only Windows way. */
+  const STORE_URL = "https://apps.microsoft.com/detail/9n1gg0g88csj";
   const NPM = "npm install -g viberoom";
   /** The vibemate who says the word before Windows' direct installer: one of the faces viberoom itself carries. */
   const NOTE_FACE = "/assets/img/vibemate.webp";
@@ -193,7 +193,7 @@
       // the Store first and largest; the direct installer beneath it, smaller, after an "or"
       button.href = STORE_URL;
       button.textContent = "Download from the Microsoft Store";
-      aside.innerHTML = `or <a href="${first.url}" data-exe-note>download the installer directly</a> · ${size(first.bytes)}`;
+      aside.innerHTML = `or <a href="${first.url}" data-exe-note>download it from here</a> · ${size(first.bytes)}`;
     } else {
       button.href = first.url;
       button.textContent = downloads.length > 1 && first.label ? `Download · ${first.label}` : `Download for ${spec.label}`;

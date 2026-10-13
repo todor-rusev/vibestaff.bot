@@ -1,4 +1,4 @@
-# Deploys the committed site/ to GitHub Pages (vibestaff.bot).
+# Deploys the committed site/ to GitHub Pages (viberoom.chat).
 #
 # There is no build step: site/ IS the artifact. What there is, before every deploy, is the gate
 # (scripts/check.mjs): the pages are all present, every local link resolves, and nothing from the

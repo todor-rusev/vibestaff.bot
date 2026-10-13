@@ -73,8 +73,8 @@
   }
 }
 
-/* the page as a whole at 90%, where it reads best; phones keep their own size */
-@media (min-width: 760px) { html { zoom: 0.9; } }
+/* the page as a whole at 81% (90% of the earlier 90%), where it reads best; phones keep their own size */
+@media (min-width: 760px) { html { zoom: 0.81; } }
 * { box-sizing: border-box; }
 body { margin: 0; overflow-x: hidden; }
 img { max-width: 100%; height: auto; display: block; }

@@ -64,7 +64,7 @@ reduced motion, diagram geometry, and asset/script errors. Browser engine tests
 on Windows are not a claim of testing physical macOS/Linux or mobile devices.
 
 This folder remains the editable source. Its exact static files are also published
-at `https://vibestaff.bot/dave-studio/`, independently of the main landing page.
+at `https://viberoom.chat/dave-studio/`, independently of the main landing page.
 After editing, export the tracked source, check it, commit, and use the existing
 publisher from the website directory:
 
