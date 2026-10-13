@@ -122,7 +122,7 @@
       note.className = "exe-note";
       note.setAttribute("aria-labelledby", "exe-note-title");
       // the Store's copy is the same viberoom, signed by Microsoft; where its address is known the note says so and links it
-      const store = STORE_URL ? `<p>If you would rather skip those questions, get it from the Microsoft Store instead: the same viberoom, signed by Microsoft, so nothing asks.</p>` : "";
+      const store = STORE_URL ? `<p>You can also get viberoom from the Microsoft Store: the Store-signed copy has no SmartScreen download warning.</p>` : "";
       note.innerHTML = `
         <button class="exe-note-x" type="button" data-role="note-close" aria-label="Close">&times;</button>
         <div class="exe-note-head">
@@ -160,14 +160,28 @@
 
   // --- the cards on the page -------------------------------------------------------------------
 
+  function paintStore(card) {
+    const button = card.querySelector('[data-role="button"]');
+    button.href = STORE_URL;
+    button.textContent = "Download from the Microsoft Store";
+    button.classList.remove("ghost");
+    button.classList.add("primary");
+    button.removeAttribute("download");
+  }
+
   function paintCard(card, system, state, release) {
     const spec = SYSTEMS[system];
     const button = card.querySelector('[data-role="button"]');
     const aside = card.querySelector('[data-role="aside"]');
     const alt = card.querySelector('[data-role="alt"]');
     const store = STORE_URL && system === "windows";
+    if (store) paintStore(card);
 
     if (state === "unreachable") {
+      if (store) {
+        aside.textContent = "The Microsoft Store is available. Direct installer details could not be read from GitHub.";
+        return;
+      }
       button.href = RELEASES;
       button.textContent = `All downloads for ${spec.label}`;
       aside.textContent = "The list of releases could not be read from here; the page on GitHub has every file.";
@@ -176,6 +190,10 @@
 
     const downloads = state === "ready" ? offer(system, release) : [];
     if (!downloads.length) {
+      if (store) {
+        aside.textContent = "A direct Windows installer is not available in the latest GitHub release.";
+        return;
+      }
       // Nothing for this system in the newest release. The npm route works today on all three, so it is
       // what the button offers instead of a dead link — and it says why, which a greyed-out button cannot.
       button.href = "#npm";
@@ -219,6 +237,7 @@
     const cards = [...document.querySelectorAll("[data-system]")];
     if (!cards.length) return;
     const mine = thisSystem();
+    if (STORE_URL) for (const card of cards.filter(card => card.dataset.system === "windows")) paintStore(card);
     let release = { tag: null, assets: [] };
     let state = "ready";
     try { release = await latest(); } catch { state = "unreachable"; }
@@ -235,8 +254,9 @@
 
     const line = document.querySelector("[data-role=release-line]");
     if (line) {
-      line.textContent = state === "unreachable" ? "Every file is on the releases page."
+      line.textContent = state === "unreachable" ? "Direct download details are on the GitHub releases page."
         : release.tag ? `Newest release: ${release.tag}${release.published ? ` · ${new Date(release.published).toLocaleDateString()}` : ""}`
+        : STORE_URL ? "The Windows app is available from the Microsoft Store."
         : "The desktop package is on its way; npm works today.";
     }
   }
@@ -247,6 +267,13 @@
     const say = document.querySelector("[data-role=state]");
     const link = document.querySelector("[data-role=link]");
     const tell = (text) => { if (say) say.textContent = text; };
+    if (STORE_URL && system === "windows") {
+      tell("Opening the Microsoft Store…");
+      link.href = STORE_URL;
+      link.textContent = "Open the Store";
+      location.href = STORE_URL;
+      return;
+    }
     try {
       const release = await latest();
       const downloads = offer(system, release);
@@ -254,13 +281,6 @@
         tell(`The newest release has no ${SYSTEMS[system].label} file yet. Every file, and the other ways to install, are on the main page.`);
         link.href = "/#download";
         link.textContent = "Ways to install viberoom";
-        return;
-      }
-      if (STORE_URL && system === "windows") {
-        tell("Opening the Microsoft Store…");
-        link.href = STORE_URL;
-        link.textContent = "Open the Store";
-        location.href = STORE_URL;
         return;
       }
       const first = downloads[0];

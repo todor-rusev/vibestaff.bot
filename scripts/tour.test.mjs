@@ -291,9 +291,10 @@ try {
   await navigate("download");
   assert.equal(
     await page.locator('[data-role="button"][href="#npm"]').count(),
-    3,
+    2,
   );
-  await page.locator('[data-role="button"]').first().click();
+  assert.equal(await page.locator('[data-system="windows"] [data-role="button"]').getAttribute('href'), 'https://apps.microsoft.com/detail/9n1gg0g88csj');
+  await page.locator('[data-system="mac"] [data-role="button"]').click();
   assert.equal(
     await page.locator("body").getAttribute("data-route"),
     "download",
